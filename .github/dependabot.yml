@@ -1,0 +1,13 @@
+version: 2
+updates:
+  # Keep GitHub Actions (the `uses:` in .github/workflows) up to date.
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "monthly"
+    groups:
+      # Collapse all action bumps into a single PR to reduce noise.
+      github-actions:
+        patterns: ["*"]
+    commit-message:
+      prefix: "ci"
