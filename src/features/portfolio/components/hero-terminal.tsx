@@ -3,17 +3,21 @@
 import { useCallback, useEffect, useRef, useState } from "react"
 import { decodeEmail } from "@/utils/string"
 import { useRouter } from "@bprogress/next/app"
+import { useSetAtom } from "jotai"
 import { useReducedMotion } from "motion/react"
 import { useTheme } from "next-themes"
 
 import { fireConfetti } from "@/lib/confetti"
 import { trackEvent } from "@/lib/events"
 import { cn } from "@/lib/utils"
+import { hireDialogOpenAtom } from "@/features/portfolio/components/hire/hire-state"
+import { workDialogAtom } from "@/features/portfolio/components/work/work-state"
 import { EXPERIENCES } from "@/features/portfolio/data/experiences"
 import { PROJECTS } from "@/features/portfolio/data/projects"
 import { SOCIAL_LINKS } from "@/features/portfolio/data/social-links"
 import { TECH_STACK } from "@/features/portfolio/data/tech-stack"
 import { USER } from "@/features/portfolio/data/user"
+import { WORK } from "@/features/portfolio/data/work"
 
 type Line = {
   id: number
@@ -27,6 +31,8 @@ type CommandContext = {
   setTheme: (theme: string) => void
   resolvedTheme: string | undefined
   navigate: (href: "/play") => void
+  openHire: () => void
+  openWork: (id: string) => void
 }
 
 type Command = {
@@ -37,7 +43,15 @@ type Command = {
 }
 
 /** Folders `ls` and `cd` know about; each maps to a section id on the page. */
-const SECTIONS = ["about", "stack", "experience", "projects", "education"]
+const SECTIONS = [
+  "about",
+  "work",
+  "experience",
+  "stack",
+  "projects",
+  "education",
+  "contact",
+]
 
 const CHAI_LINES = [
   "One cutting chai, extra adrak. Productivity +10.",
@@ -159,8 +173,31 @@ const COMMANDS: Record<string, Command> = {
       )
     },
   },
+  work: {
+    description: "client work, with screenshots",
+    run: ({ openWork }) => (
+      <div className="space-y-0.5">
+        {WORK.map((item) => (
+          <div key={item.id}>
+            <Accent>→</Accent>{" "}
+            <button
+              type="button"
+              onClick={() => openWork(item.id)}
+              className="underline decoration-stone-500 underline-offset-2 hover:text-orange-300 hover:decoration-orange-300"
+            >
+              {item.title}
+            </button>{" "}
+            <Muted>
+              {item.kind}, {item.year}
+            </Muted>
+          </div>
+        ))}
+        <Muted>Click one to open it.</Muted>
+      </div>
+    ),
+  },
   projects: {
-    description: "things I shipped",
+    description: "the rest of what I shipped",
     run: () => (
       <div className="space-y-0.5">
         {PROJECTS.slice(0, 5).map((project) => (
@@ -224,7 +261,7 @@ const COMMANDS: Record<string, Command> = {
     ),
   },
   cd: {
-    description: "jump to a section, e.g. `cd projects`",
+    description: "jump to a section, e.g. `cd work`",
     run: ({ args }) => {
       const target = (args[0] ?? "").replace(/\/$/, "")
 
@@ -293,14 +330,14 @@ const COMMANDS: Record<string, Command> = {
   },
   hire: {
     description: "the best command",
-    run: () => {
+    run: ({ openHire }) => {
       fireConfetti()
+      setTimeout(openHire, 700)
       const email = decodeEmail(USER.emailB64)
       return (
         <span>
-          Excellent choice. Drop me a line at{" "}
-          <ExternalLink href={`mailto:${email}`}>{email}</ExternalLink> and
-          let&apos;s build something.
+          Excellent choice. Opening a project brief… or write to{" "}
+          <ExternalLink href={`mailto:${email}`}>{email}</ExternalLink>.
         </span>
       )
     },
@@ -314,9 +351,10 @@ const COMMANDS: Record<string, Command> = {
   },
   sudo: {
     hidden: true,
-    run: ({ args }) => {
+    run: (ctx) => {
+      const { args } = ctx
       if (args.join(" ").startsWith("hire")) {
-        return COMMANDS.hire.run({} as CommandContext)
+        return COMMANDS.hire.run(ctx)
       }
       return "visitor is not in the sudoers file. This incident will be reported to my mom."
     },
@@ -383,6 +421,8 @@ const INTRO_COMMAND = "whoami"
 export function HeroTerminal({ className }: { className?: string }) {
   const router = useRouter()
   const { setTheme, resolvedTheme } = useTheme()
+  const setHireOpen = useSetAtom(hireDialogOpenAtom)
+  const setWorkDialog = useSetAtom(workDialogAtom)
   const shouldReduceMotion = useReducedMotion()
 
   const [lines, setLines] = useState<Line[]>([])
@@ -436,6 +476,8 @@ export function HeroTerminal({ className }: { className?: string }) {
         setTheme,
         resolvedTheme,
         navigate: (href) => router.push(href),
+        openHire: () => setHireOpen(true),
+        openWork: (id) => setWorkDialog({ id, open: true }),
       })
 
       if (name.toLowerCase() === "clear") return
@@ -444,7 +486,7 @@ export function HeroTerminal({ className }: { className?: string }) {
         pushLines({ kind: "output", content: output })
       }
     },
-    [pushLines, resolvedTheme, router, setTheme]
+    [pushLines, resolvedTheme, router, setTheme, setHireOpen, setWorkDialog]
   )
 
   // Boot sequence: type `whoami` like a person would, then hand over.
