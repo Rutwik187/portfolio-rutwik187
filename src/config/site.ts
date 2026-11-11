@@ -25,11 +25,11 @@ export const MAIN_NAV: NavItem<Route>[] = [
   },
   {
     title: "Work",
-    href: "/#experience",
+    href: "/#work",
   },
   {
-    title: "Projects",
-    href: "/#projects",
+    title: "Experience",
+    href: "/#experience",
   },
   {
     title: "Play",

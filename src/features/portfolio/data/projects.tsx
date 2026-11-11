@@ -1,7 +1,6 @@
 import {
   BrainCircuitIcon,
   ChartColumnIcon,
-  Gamepad2Icon,
   GemIcon,
   HeartHandshakeIcon,
   MicIcon,
@@ -14,29 +13,6 @@ import {
 import type { Project } from "../types/projects"
 
 export const PROJECTS: Project[] = [
-  {
-    id: "high-octane",
-    title: "High Octane",
-    period: {
-      start: "05.2026",
-    },
-    link: "https://highoctane.in",
-    skills: [
-      "Next.js",
-      "TypeScript",
-      "PostgreSQL",
-      "Neon",
-      "Razorpay",
-      "Sanity",
-      "Resend",
-    ],
-    description: `Booking platform for an arcade and adventure park: go-karting, bowling, and paintball with real-time slots.
-- Single bookings, activity bundles, and a gift card system
-- Admin dashboard for the venue team
-- Online payments with Razorpay`,
-    icon: <Gamepad2Icon />,
-    isExpanded: true,
-  },
   {
     id: "welfare-chat",
     title: "AI Welfare Assistant",

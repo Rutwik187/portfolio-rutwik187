@@ -11,6 +11,10 @@ const eventSchema = z.object({
     "terminal_command",
     "konami_unlocked",
     "snake_game_over",
+    "open_hire_brief",
+    "send_hire_brief",
+    "copy_hire_brief",
+    "open_work",
   ]),
   // declare type AllowedPropertyValues = string | number | boolean | null
   properties: z

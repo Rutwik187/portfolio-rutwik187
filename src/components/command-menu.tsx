@@ -5,6 +5,7 @@ import { copyToClipboardWithEvent } from "@/utils/copy"
 import { decodeEmail } from "@/utils/string"
 import { useRouter } from "@bprogress/next/app"
 import { useTiks } from "@rexa-developer/tiks/react"
+import { useSetAtom } from "jotai"
 import {
   BoxIcon,
   BriefcaseBusinessIcon,
@@ -15,11 +16,14 @@ import {
   FileTextIcon,
   Gamepad2Icon,
   GraduationCapIcon,
+  HandshakeIcon,
   HouseIcon,
   LayersIcon,
   MonitorIcon,
   MoonStarIcon,
   PartyPopperIcon,
+  SendIcon,
+  SparklesIcon,
   SunMediumIcon,
   TextInitialIcon,
 } from "lucide-react"
@@ -40,6 +44,7 @@ import {
   CommandShortcut,
 } from "@/components/ui/command"
 import { toast } from "@/components/ui/toast"
+import { hireDialogOpenAtom } from "@/features/portfolio/components/hire/hire-state"
 import { SOCIAL_ICONS } from "@/features/portfolio/components/social-link-icons"
 import { SOCIAL_LINKS } from "@/features/portfolio/data/social-links"
 import { USER } from "@/features/portfolio/data/user"
@@ -87,11 +92,11 @@ const SECTION_LINKS: CommandLinkItem[] = [
     icon: <TextInitialIcon />,
   },
   {
-    title: "Stack",
-    href: "/#stack",
+    title: "Selected work",
+    href: "/#work",
     kind: "page",
-    icon: <LayersIcon />,
-    keywords: ["skills", "tech"],
+    icon: <SparklesIcon />,
+    keywords: ["portfolio", "projects", "clients", "apps", "rag"],
   },
   {
     title: "Experience",
@@ -101,7 +106,14 @@ const SECTION_LINKS: CommandLinkItem[] = [
     keywords: ["work", "jobs"],
   },
   {
-    title: "Projects",
+    title: "Stack",
+    href: "/#stack",
+    kind: "page",
+    icon: <LayersIcon />,
+    keywords: ["skills", "tech"],
+  },
+  {
+    title: "More projects",
     href: "/#projects",
     kind: "page",
     icon: <BoxIcon />,
@@ -111,6 +123,13 @@ const SECTION_LINKS: CommandLinkItem[] = [
     href: "/#education",
     kind: "page",
     icon: <GraduationCapIcon />,
+  },
+  {
+    title: "Contact",
+    href: "/#contact",
+    kind: "page",
+    icon: <HandshakeIcon />,
+    keywords: ["hire", "freelance", "email"],
   },
 ]
 
@@ -164,6 +183,8 @@ export function CommandMenu({
   const [click] = useClickSound()
 
   const { success: tiksSuccess } = useTiks()
+
+  const setHireOpen = useSetAtom(hireDialogOpenAtom)
 
   useHotkeys(
     "mod+k, slash",
@@ -239,6 +260,15 @@ export function CommandMenu({
     [click, setTheme]
   )
 
+  const handleStartBrief = useCallback(() => {
+    setOpen(false)
+    trackEvent({
+      name: "open_hire_brief",
+      properties: { source: "command_menu" },
+    })
+    setHireOpen(true)
+  }, [setHireOpen])
+
   const handleBrewChai = useCallback(() => {
     setOpen(false)
     trackEvent({
@@ -304,6 +334,14 @@ export function CommandMenu({
             />
 
             <CommandGroup heading="Contact">
+              <CommandMenuItem
+                keywords={["hire", "freelance", "project", "brief", "job"]}
+                onHighlight={handleCommandHighlight}
+                onSelect={handleStartBrief}
+              >
+                <SendIcon />
+                Start a project brief
+              </CommandMenuItem>
               <CommandMenuItem
                 keywords={["mail", "hire"]}
                 onHighlight={handleCommandHighlight}

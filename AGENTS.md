@@ -16,7 +16,7 @@ Next.js 16 (App Router) personal portfolio for Rutwik Shinde.
 | `src/config/`                          | Site config (`site.ts`) and JSON-LD                          |
 | `src/hooks/`, `src/lib/`, `src/utils/` | Hooks, libraries, utilities                                  |
 
-**Key files**: `src/features/portfolio/data/` (all personal content), `src/features/portfolio/components/hero-terminal.tsx` (terminal commands), `src/styles/globals.css` (theme tokens, including the `--brand` saffron accent)
+**Key files**: `src/features/portfolio/data/` (all personal content, including `work.ts` for the selected work), `src/assets/work/` (project screenshots), `src/features/portfolio/components/hero-terminal.tsx` (terminal commands), `src/styles/globals.css` (theme tokens, including the `--brand` saffron accent)
 
 ## Coding guidelines
 
