@@ -23,11 +23,13 @@ export function Projects() {
         </PanelTitle>
       </PanelHeader>
 
-      <CollapsibleList
-        items={PROJECTS}
-        max={4}
-        renderItem={(item) => <ProjectItem project={item} />}
-      />
+      <div className="px-4">
+        <CollapsibleList
+          items={PROJECTS}
+          max={4}
+          renderItem={(item) => <ProjectItem project={item} />}
+        />
+      </div>
     </Panel>
   )
 }

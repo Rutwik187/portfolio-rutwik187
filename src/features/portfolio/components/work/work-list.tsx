@@ -76,7 +76,7 @@ export function WorkList() {
     <div className="relative">
       <ol
         ref={listRef}
-        className="group/list"
+        className="group/list mx-4"
         onPointerLeave={() => setActiveId(null)}
       >
         {WORK.map((work, index) => (
@@ -84,7 +84,7 @@ export function WorkList() {
             <button
               type="button"
               aria-haspopup="dialog"
-              className="group/row flex w-full items-center text-left transition-opacity duration-300 outline-none group-hover/list:opacity-40 hover:opacity-100 focus-visible:bg-accent-muted focus-visible:ring-2 focus-visible:ring-ring/50 focus-visible:ring-inset"
+              className="group/row flex w-full items-center gap-4 py-4 text-left transition-opacity duration-300 outline-none group-hover/list:opacity-40 hover:opacity-100 focus-visible:bg-accent-muted focus-visible:ring-2 focus-visible:ring-ring/50 focus-visible:ring-inset"
               onPointerEnter={(event) => {
                 if (event.pointerType !== "mouse") return
                 follow(event, activeId === null)
@@ -97,13 +97,13 @@ export function WorkList() {
               onClick={() => handleOpen(work)}
             >
               <span
-                className="w-14 shrink-0 text-center font-mono text-sm text-muted-foreground tabular-nums"
+                className="w-6 shrink-0 font-mono text-sm text-muted-foreground tabular-nums"
                 aria-hidden
               >
                 {String(index + 1).padStart(2, "0")}
               </span>
 
-              <span className="flex min-w-0 flex-1 items-center gap-4 border-l border-dashed border-line p-4">
+              <span className="flex min-w-0 flex-1 items-center gap-4">
                 <span className="min-w-0 flex-1 transition-transform duration-300 group-hover/row:translate-x-1">
                   <span className="block leading-snug font-medium text-balance">
                     {work.title}

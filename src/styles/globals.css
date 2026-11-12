@@ -132,58 +132,6 @@
   @apply underline decoration-current/30 decoration-1 underline-offset-3 transition-colors hover:decoration-current;
 }
 
-@utility screen-line-top {
-  @apply relative;
-  &:before {
-    content: "";
-    @apply absolute top-0 left-[-100vw] -z-1 h-px w-[200vw] bg-line;
-  }
-}
-
-@utility screen-line-top-* {
-  &:before {
-    background-color: --value(--color-*, [color]);
-  }
-}
-
-@utility screen-line-bottom {
-  @apply relative;
-  &:after {
-    content: "";
-    @apply absolute bottom-0 left-[-100vw] -z-1 h-px w-[200vw] bg-line;
-  }
-}
-
-@utility screen-line-bottom-* {
-  &:after {
-    background-color: --value(--color-*, [color]);
-  }
-}
-
-@utility screen-dashed-line-top {
-  @apply screen-line-top;
-  &:before {
-    content: "";
-    @apply bg-inherit bg-[linear-gradient(to_right,var(--line)_4px,transparent_2px)] bg-size-[6px_1px] bg-repeat-x;
-  }
-}
-
-@utility screen-dashed-line-bottom {
-  @apply screen-line-bottom;
-  &:after {
-    content: "";
-    @apply bg-inherit bg-[linear-gradient(to_right,var(--line)_4px,transparent_2px)] bg-size-[6px_1px] bg-repeat-x;
-  }
-}
-
-@utility screen-line-top-none {
-  @apply before:content-none;
-}
-
-@utility screen-line-bottom-none {
-  @apply after:content-none;
-}
-
 @utility diagonal-stripes {
   @apply [--pattern-foreground:var(--color-line)]/56;
   @apply bg-[repeating-linear-gradient(315deg,var(--pattern-foreground)_0,var(--pattern-foreground)_1px,transparent_0,transparent_50%)] bg-size-[10px_10px];
@@ -192,33 +140,6 @@
 @utility dot-grid {
   @apply [--pattern-foreground:var(--color-stone-950)]/6 dark:[--pattern-foreground:var(--color-white)]/5;
   @apply bg-[radial-gradient(var(--pattern-foreground)_1px,transparent_0)] bg-size-[8px_8px];
-}
-
-/* Ruler ticks: a short tick every 8px and a long, accented one every 64px. */
-@utility ruler-ticks {
-  --tick: var(--color-line);
-  background-image:
-    linear-gradient(
-      to right,
-      color-mix(in oklab, var(--brand) 55%, transparent) 1px,
-      transparent 1px
-    ),
-    linear-gradient(to right, var(--tick) 1px, transparent 1px);
-  background-size:
-    64px 55%,
-    8px 30%;
-  background-position:
-    0 100%,
-    0 100%;
-  background-repeat: repeat-x;
-}
-
-@utility ruler-divider {
-  @apply relative h-8;
-  &:before {
-    content: "";
-    @apply absolute left-[-100vw] -z-1 h-full w-[200vw] ruler-ticks;
-  }
 }
 
 @utility step {
@@ -400,7 +321,6 @@
   --chart-ring-background: oklch(0.9 0.005 260 / 0.25);
   --chart-label: oklch(0.45 0.01 260);
 
-
   /* Layout */
   --header-height: --spacing(14);
   --fade-bottom-height: --spacing(24);
@@ -513,7 +433,6 @@
   --chart-marker-foreground: oklch(0.9 0 0);
   --chart-ring-background: oklch(0.35 0.01 260 / 0.25);
   --chart-label: oklch(0.75 0.01 260);
-
 }
 
 @layer base {
@@ -636,7 +555,6 @@
     height: var(--fade-height, 2.25rem);
     background: var(--fade-background, var(--fade-linear-gradient));
   }
-
 
   .twemoji {
     display: inline-block;

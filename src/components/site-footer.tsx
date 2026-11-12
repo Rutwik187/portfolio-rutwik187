@@ -14,11 +14,9 @@ const BUILD_YEAR = new Date(
 
 export function SiteFooter() {
   return (
-    <footer className="max-w-screen overflow-x-clip px-2 pb-[calc(var(--fade-bottom-height)+env(safe-area-inset-bottom,0))] sm:pb-0">
-      <div className="mx-auto border-x md:max-w-3xl">
-        <div className="ruler-divider h-8" aria-hidden />
-
-        <div className="screen-line-top grid gap-6 p-4 sm:grid-cols-[1fr_auto] sm:items-end">
+    <footer className="mt-16 max-w-screen overflow-x-clip border-t border-line px-2 pb-[calc(var(--fade-bottom-height)+env(safe-area-inset-bottom,0))] sm:mt-24 sm:pb-0">
+      <div className="mx-auto md:max-w-3xl lg:max-w-5xl">
+        <div className="grid gap-6 px-4 pt-10 pb-6 sm:grid-cols-[1fr_auto] sm:items-end">
           <div className="space-y-3">
             <div className="flex items-center gap-2.5">
               <RutwikMark className="size-8" />
@@ -65,7 +63,7 @@ export function SiteFooter() {
           </nav>
         </div>
 
-        <div className="screen-line-top flex flex-col gap-2 px-4 py-3 font-mono text-xs text-muted-foreground sm:flex-row sm:items-center sm:justify-between">
+        <div className="flex flex-col gap-2 px-4 pt-2 pb-8 font-mono text-xs text-muted-foreground sm:flex-row sm:items-center sm:justify-between">
           <p>
             © {BUILD_YEAR} {USER.displayName}. Started from{" "}
             <a
@@ -96,7 +94,6 @@ export function SiteFooter() {
           </p>
         </div>
       </div>
-      <div className="screen-line-top h-px" />
     </footer>
   )
 }

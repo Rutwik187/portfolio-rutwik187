@@ -10,7 +10,7 @@ export function ExperienceItem({ experience }: { experience: Experience }) {
   return (
     <div
       id={`experience-${experience.id}`}
-      className="group/experience screen-line-bottom scroll-mt-14 space-y-4 py-4"
+      className="group/experience scroll-mt-14 space-y-4 border-b border-line py-6 last:border-b-0"
     >
       <div className="flex items-start gap-3 sm:items-center">
         <div className="flex size-6 shrink-0 items-center justify-center select-none [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg]:text-muted-foreground [&_svg:not([class*='size-'])]:size-5">

@@ -26,10 +26,8 @@ export const USER: User = {
       experienceId: "aiedx",
     },
   ],
-  about: `- Hi, I'm Rutwik. I'm a full stack developer from Pune who loves turning messy ideas into products people actually use.
-- These days I build AI agents and LLM-powered apps with [AIEdX](https://aiedx.com) and [BubblSpace](https://bubblspace.com), from prompt to production.
-- Before that, I delivered web products for 10+ clients across e-commerce, IT, and agriculture: storefronts, booking platforms, dashboards, and payment flows.
-- My favourite part of programming is the problem-solving. I love the moment a stubborn bug finally gives up.
+  about: `- Hi, I'm Rutwik, a full stack developer from Pune. I turn messy ideas into products people actually use.
+- Today I build AI agents and LLM apps with [AIEdX](https://aiedx.com) and [BubblSpace](https://bubblspace.com). Before that, I shipped storefronts, booking platforms, dashboards and payment flows for 10+ clients.
 - Outside of code: video games, movies, my dog, and a slowly improving guitar.
 `,
   avatar: "https://avatars.githubusercontent.com/u/86617402?v=4",
