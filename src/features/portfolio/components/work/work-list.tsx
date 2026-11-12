@@ -1,7 +1,6 @@
 "use client"
 
 import { useRef, useState } from "react"
-import { useSetAtom } from "jotai"
 import { ArrowRightIcon } from "lucide-react"
 import {
   motion,
@@ -12,14 +11,13 @@ import {
   type MotionValue,
 } from "motion/react"
 
-import { trackEvent } from "@/lib/events"
 import { cn } from "@/lib/utils"
 
 import { WORK } from "../../data/work"
 import type { Work } from "../../types/work"
 import { BrowserFrame, PhoneFrame } from "./device-frames"
+import { useOpenWork } from "./use-open-work"
 import { WorkDialog } from "./work-dialog"
-import { workDialogAtom } from "./work-state"
 
 const PREVIEW_WIDTH = 352
 const PREVIEW_HEIGHT = 236
@@ -28,7 +26,7 @@ const CURSOR_GAP = 28
 const FOLLOW_SPRING = { stiffness: 260, damping: 28, mass: 0.5 }
 
 export function WorkList() {
-  const setDialog = useSetAtom(workDialogAtom)
+  const openWork = useOpenWork()
   const listRef = useRef<HTMLOListElement>(null)
 
   // `activeId` says if the preview is visible. `shownId` keeps the last
@@ -68,15 +66,14 @@ export function WorkList() {
 
   const handleOpen = (work: Work) => {
     setActiveId(null)
-    setDialog({ id: work.id, open: true })
-    trackEvent({ name: "open_work", properties: { id: work.id } })
+    openWork(work.id, "list")
   }
 
   return (
-    <div className="relative">
+    <div className="relative mx-4">
       <ol
         ref={listRef}
-        className="group/list mx-4"
+        className="group/list"
         onPointerLeave={() => setActiveId(null)}
       >
         {WORK.map((work, index) => (
@@ -84,6 +81,7 @@ export function WorkList() {
             <button
               type="button"
               aria-haspopup="dialog"
+              data-agent={`work-${work.id}`}
               className="group/row flex w-full items-center gap-4 py-4 text-left transition-opacity duration-300 outline-none group-hover/list:opacity-40 hover:opacity-100 focus-visible:bg-accent-muted focus-visible:ring-2 focus-visible:ring-ring/50 focus-visible:ring-inset"
               onPointerEnter={(event) => {
                 if (event.pointerType !== "mouse") return
@@ -163,7 +161,7 @@ function WorkPreview({
       aria-hidden
     >
       <motion.div
-        className="relative size-full overflow-hidden rounded-2xl shadow-2xl ring-1 shadow-stone-950/30 ring-stone-950/10 dark:ring-white/10"
+        className="relative size-full overflow-hidden rounded-2xl shadow-2xl ring-1 shadow-zinc-950/30 ring-zinc-950/10 dark:ring-white/10"
         initial={false}
         animate={
           isVisible ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.85 }

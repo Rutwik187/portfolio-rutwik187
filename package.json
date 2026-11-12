@@ -23,6 +23,7 @@
     "prepare": "husky"
   },
   "dependencies": {
+    "@ai-sdk/google": "^4.0.117",
     "@base-ui/react": "^1.8.0",
     "@bprogress/next": "^3.2.12",
     "@hugeicons/core-free-icons": "^4.1.1",
@@ -31,6 +32,7 @@
     "@openpanel/web": "^1.4.1",
     "@rexa-developer/tiks": "^0.1.9",
     "@tabler/icons-react": "^3.42.0",
+    "ai": "^7.0.169",
     "class-variance-authority": "^0.7.1",
     "cmdk": "^1.1.1",
     "cn": "^0.5.0",

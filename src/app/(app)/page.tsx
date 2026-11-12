@@ -4,14 +4,18 @@ import type { ProfilePage, WithContext } from "schema-dts"
 import { JSON_LD_ID } from "@/config/json-ld"
 import { JsonLdScript } from "@/lib/json-ld"
 import { absoluteUrl } from "@/lib/utils"
+import { getAgentCatalog } from "@/components/agent/agent-catalog"
+import { AgentChat } from "@/components/agent/agent-chat"
+import { XRayController } from "@/components/x-ray/x-ray-controller"
+import { XRaySection } from "@/components/x-ray/x-ray-section"
 import { Contact } from "@/features/portfolio/components/contact"
 import { Education } from "@/features/portfolio/components/education"
 import { Experiences } from "@/features/portfolio/components/experiences"
 import { GitHubContributions } from "@/features/portfolio/components/github-contributions"
 import { Hello } from "@/features/portfolio/components/hello"
-import { Overview } from "@/features/portfolio/components/overview"
 import { ProfileHeader } from "@/features/portfolio/components/profile-header"
 import { Projects } from "@/features/portfolio/components/projects"
+import { ShippedFor } from "@/features/portfolio/components/shipped-for"
 import { TechStack } from "@/features/portfolio/components/tech-stack"
 import { Work } from "@/features/portfolio/components/work"
 import { USER } from "@/features/portfolio/data/user"
@@ -26,33 +30,60 @@ export default function HomePage() {
   return (
     <>
       <JsonLdScript data={getProfilePageJsonLd()} />
+      <XRayController />
+      <AgentChat catalog={getAgentCatalog()} />
 
-      <div className="**:data-[slot=panel]:scroll-mt-[calc(var(--header-height)+(--spacing(8)))]">
+      <div className="relative isolate **:data-[slot=panel]:scroll-mt-[calc(var(--header-height)+(--spacing(8)))]">
+        <div
+          className="pointer-events-none absolute -inset-x-2 top-0 -z-10 h-192 hero-glow"
+          aria-hidden
+        />
+
         <div className="mx-auto md:max-w-3xl lg:max-w-5xl">
-          <ProfileHeader />
-          <Overview />
+          <XRaySection id="hero">
+            <ProfileHeader />
+          </XRaySection>
+          <XRaySection id="clients">
+            <ShippedFor />
+          </XRaySection>
           <SectionGap />
 
-          <Work />
+          <XRaySection id="work">
+            <Work />
+          </XRaySection>
           <SectionGap />
 
-          <Hello />
-          <GitHubContributions />
+          <XRaySection id="about">
+            <Hello />
+          </XRaySection>
+          <XRaySection id="github">
+            <GitHubContributions />
+          </XRaySection>
           <SectionGap />
 
-          <Experiences />
+          <XRaySection id="experience">
+            <Experiences />
+          </XRaySection>
           <SectionGap />
 
-          <TechStack />
+          <XRaySection id="stack">
+            <TechStack />
+          </XRaySection>
           <SectionGap />
 
-          <Projects />
+          <XRaySection id="projects">
+            <Projects />
+          </XRaySection>
           <SectionGap />
 
-          <Education />
+          <XRaySection id="education">
+            <Education />
+          </XRaySection>
           <SectionGap />
 
-          <Contact />
+          <XRaySection id="contact">
+            <Contact />
+          </XRaySection>
         </div>
       </div>
     </>

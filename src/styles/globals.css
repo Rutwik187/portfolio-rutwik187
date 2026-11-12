@@ -56,6 +56,7 @@
   --color-brand: var(--brand);
   --color-brand-strong: var(--brand-strong);
   --color-brand-foreground: var(--brand-foreground);
+  --color-brand-2: var(--brand-2);
 
   --font-sans: var(--font-sans);
   --font-mono: var(--font-mono);
@@ -111,6 +112,18 @@
     }
   }
 
+  /* A light sweeps left to right across text, for "thinking" states. */
+  --animate-shimmer: shimmer 1.8s linear infinite;
+
+  @keyframes shimmer {
+    from {
+      background-position: 150% 0;
+    }
+    to {
+      background-position: -50% 0;
+    }
+  }
+
   --animate-spinner-opacity: spinner-opacity
     var(--tw-animation-duration, var(--tw-duration, 1s)) linear infinite;
 
@@ -138,8 +151,35 @@
 }
 
 @utility dot-grid {
-  @apply [--pattern-foreground:var(--color-stone-950)]/6 dark:[--pattern-foreground:var(--color-white)]/5;
+  @apply [--pattern-foreground:var(--color-zinc-950)]/6 dark:[--pattern-foreground:var(--color-white)]/5;
   @apply bg-[radial-gradient(var(--pattern-foreground)_1px,transparent_0)] bg-size-[8px_8px];
+}
+
+/* The soft light behind the hero. Gradients, not blur, so it stays cheap to paint. */
+@utility hero-glow {
+  background:
+    radial-gradient(
+      50% 60% at 20% 0%,
+      color-mix(in oklab, var(--brand) 14%, transparent),
+      transparent
+    ),
+    radial-gradient(
+      40% 50% at 85% 8%,
+      color-mix(in oklab, var(--brand-2) 8%, transparent),
+      transparent
+    );
+}
+
+/*
+ * X-ray mode: a section's source code shows only inside a circle. The
+ * controller sets the radius on <html> and the centre on each overlay.
+ */
+@utility x-ray-mask {
+  mask-image: radial-gradient(
+    circle var(--x-ray-r, 0px) at var(--x-ray-x, 50%) var(--x-ray-y, 50%),
+    #000 calc(100% - 1px),
+    transparent 100%
+  );
 }
 
 @utility step {
@@ -188,59 +228,59 @@
 }
 
 :root {
-  /* warm paper */
-  --background: oklch(0.993 0.002 75);
+  /* Near-white with a cool tint, so the saffron reads warm against it. */
+  --background: oklch(0.993 0.0015 286);
 
-  /* stone-950 */
-  --foreground: oklch(0.147 0.004 49.25);
+  /* zinc-950 */
+  --foreground: oklch(0.141 0.005 285.823);
 
-  /* stone-950 */
-  --primary: oklch(0.147 0.004 49.25);
+  /* zinc-950 */
+  --primary: oklch(0.141 0.005 285.823);
 
-  /* stone-50 */
-  --primary-foreground: oklch(0.985 0.001 106.423);
+  /* zinc-50 */
+  --primary-foreground: oklch(0.985 0 0);
 
-  /* stone-100 */
-  --secondary: oklch(0.97 0.001 106.424);
+  /* zinc-100 */
+  --secondary: oklch(0.967 0.001 286.375);
 
-  /* stone-950 */
-  --secondary-foreground: oklch(0.147 0.004 49.25);
+  /* zinc-950 */
+  --secondary-foreground: oklch(0.141 0.005 285.823);
 
-  /* stone-100 */
-  --muted: oklch(0.97 0.001 106.424);
+  /* zinc-100 */
+  --muted: oklch(0.967 0.001 286.375);
 
-  /* stone-500 */
-  --muted-foreground: oklch(0.553 0.013 58.071);
+  /* zinc-500 */
+  --muted-foreground: oklch(0.552 0.016 285.938);
 
-  --card: oklch(0.993 0.002 75);
+  --card: oklch(1 0 0);
 
-  /* stone-950 */
-  --card-foreground: oklch(0.147 0.004 49.25);
+  /* zinc-950 */
+  --card-foreground: oklch(0.141 0.005 285.823);
 
-  --popover: oklch(0.997 0.001 75);
+  --popover: oklch(1 0 0);
 
-  /* stone-950 */
-  --popover-foreground: oklch(0.147 0.004 49.25);
+  /* zinc-950 */
+  --popover-foreground: oklch(0.141 0.005 285.823);
 
-  /* stone-100 */
-  --accent: oklch(0.97 0.001 106.424);
+  /* zinc-100 */
+  --accent: oklch(0.967 0.001 286.375);
 
   --accent-muted: color-mix(in oklab, var(--accent) 50%, transparent);
 
-  /* stone-900 */
-  --accent-foreground: oklch(0.216 0.006 56.043);
+  /* zinc-900 */
+  --accent-foreground: oklch(0.21 0.006 285.885);
 
-  /* stone-200 */
-  --border: oklch(0.923 0.003 48.717);
+  /* zinc-200 */
+  --border: oklch(0.92 0.004 286.32);
 
   /* color-mix */
   --line: color-mix(in oklab, var(--border) 64%, var(--background));
 
-  /* stone-200 */
-  --input: oklch(0.923 0.003 48.717);
+  /* zinc-200 */
+  --input: oklch(0.92 0.004 286.32);
 
-  /* stone-400 */
-  --ring: oklch(0.709 0.01 56.259);
+  /* zinc-400 */
+  --ring: oklch(0.705 0.015 286.067);
 
   --info: oklch(0.67 0.17 244.98);
 
@@ -256,13 +296,15 @@
   /* Saffron, the one accent colour. orange-500 for marks, orange-700 for text. */
   --brand: oklch(0.705 0.213 47.604);
   --brand-strong: oklch(0.553 0.195 38.402);
-  --brand-foreground: oklch(0.147 0.004 49.25);
+  --brand-foreground: oklch(0.141 0.005 285.823);
+  /* amber-400: only the far end of saffron gradients and glows. */
+  --brand-2: oklch(0.828 0.189 84.429);
 
-  /* stone-50 */
-  --surface: oklch(0.985 0.001 106.423);
+  /* zinc-50 */
+  --surface: oklch(0.985 0 0);
 
-  /* stone-950 */
-  --surface-foreground: oklch(0.147 0.004 49.25);
+  /* zinc-950 */
+  --surface-foreground: oklch(0.141 0.005 285.823);
 
   --code: var(--background);
   --code-foreground: var(--foreground);
@@ -327,57 +369,53 @@
 }
 
 .dark {
-  /* stone-950 */
-  --background: oklch(0.147 0.004 49.25);
+  /* A little deeper than zinc-950, so cards and glows have room to lift. */
+  --background: oklch(0.13 0.005 285.8);
 
-  /* stone-50 */
-  --foreground: oklch(0.985 0.001 106.423);
+  /* zinc-50 */
+  --foreground: oklch(0.985 0 0);
 
-  /* stone-50 */
-  --primary: oklch(0.985 0.001 106.423);
+  /* zinc-50 */
+  --primary: oklch(0.985 0 0);
 
-  /* stone-950 */
-  --primary-foreground: oklch(0.147 0.004 49.25);
+  /* zinc-950 */
+  --primary-foreground: oklch(0.141 0.005 285.823);
 
-  /* stone-800 */
-  --secondary: oklch(0.268 0.007 34.298);
+  /* between zinc-900 and zinc-800 */
+  --secondary: oklch(0.235 0.006 286);
 
-  /* stone-50 */
-  --secondary-foreground: oklch(0.985 0.001 106.423);
+  /* zinc-50 */
+  --secondary-foreground: oklch(0.985 0 0);
 
-  /* stone-800 */
-  --muted: oklch(0.268 0.007 34.298);
+  --muted: oklch(0.235 0.006 286);
 
-  /* stone-400 */
-  --muted-foreground: oklch(0.709 0.01 56.259);
+  /* zinc-400 */
+  --muted-foreground: oklch(0.705 0.015 286.067);
 
-  /* stone-900 */
-  --card: oklch(0.216 0.006 56.043);
+  /* one step above the background */
+  --card: oklch(0.175 0.006 286);
 
-  /* stone-50 */
-  --card-foreground: oklch(0.985 0.001 106.423);
+  /* zinc-50 */
+  --card-foreground: oklch(0.985 0 0);
 
-  /* stone-900 */
-  --popover: oklch(0.216 0.006 56.043);
+  --popover: oklch(0.175 0.006 286);
 
-  /* stone-50 */
-  --popover-foreground: oklch(0.985 0.001 106.423);
+  /* zinc-50 */
+  --popover-foreground: oklch(0.985 0 0);
 
-  /* stone-800 */
-  --accent: oklch(0.268 0.007 34.298);
+  --accent: oklch(0.235 0.006 286);
 
   --accent-muted: color-mix(in oklab, var(--accent) 20%, transparent);
 
-  /* stone-50 */
-  --accent-foreground: oklch(0.985 0.001 106.423);
+  /* zinc-50 */
+  --accent-foreground: oklch(0.985 0 0);
 
-  /* stone-800 */
-  --border: oklch(0.268 0.007 34.298);
+  --border: oklch(0.26 0.006 286);
 
   --input: lab(100% 0 0 / 0.15);
 
-  /* stone-500 */
-  --ring: oklch(0.553 0.013 58.071);
+  /* zinc-500 */
+  --ring: oklch(0.552 0.016 285.938);
 
   /* green-500 */
   --success: oklch(0.723 0.219 149.579);
@@ -391,13 +429,14 @@
   /* orange-400 reads well on the dark background, for marks and text */
   --brand: oklch(0.75 0.183 55.934);
   --brand-strong: oklch(0.75 0.183 55.934);
-  --brand-foreground: oklch(0.147 0.004 49.25);
+  --brand-foreground: oklch(0.141 0.005 285.823);
+  /* amber-300: only the far end of saffron gradients and glows. */
+  --brand-2: oklch(0.879 0.169 91.605);
 
-  /* stone-900 */
-  --surface: oklch(0.216 0.006 56.043);
+  --surface: oklch(0.175 0.006 286);
 
-  /* stone-50 */
-  --surface-foreground: oklch(0.985 0.001 106.423);
+  /* zinc-50 */
+  --surface-foreground: oklch(0.985 0 0);
 
   --code: var(--background);
   --code-foreground: var(--foreground);

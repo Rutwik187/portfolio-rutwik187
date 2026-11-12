@@ -199,7 +199,12 @@ export function HireDialog() {
             </Field>
 
             <div className="flex flex-wrap gap-2 pt-1">
-              <Button type="submit" size="lg" disabled={!isReady}>
+              <Button
+                type="submit"
+                variant="brand"
+                size="lg"
+                disabled={!isReady}
+              >
                 <SendIcon data-icon="inline-start" />
                 Send by email
               </Button>
@@ -322,7 +327,7 @@ function BriefReceipt({
       {/* The mask clips box shadows, so the shadow lives on a wrapper. */}
       <div className="w-full max-w-xs -rotate-1 drop-shadow-[0_10px_18px_rgb(28_25_23/0.14)]">
         <div
-          className="bg-[#fffdf8] px-5 pt-5 pb-8 font-mono text-xs/relaxed text-stone-800 dark:bg-stone-200"
+          className="bg-[#fffdf8] px-5 pt-5 pb-8 font-mono text-xs/relaxed text-zinc-800 dark:bg-zinc-200"
           // A torn, zig-zag bottom edge like a till receipt.
           style={{ mask: RECEIPT_EDGE_MASK, WebkitMask: RECEIPT_EDGE_MASK }}
           aria-live="polite"
@@ -336,26 +341,26 @@ function BriefReceipt({
           <dl className="space-y-1">
             {rows.map(([label, value]) => (
               <div key={label} className="grid grid-cols-[3.5rem_1fr] gap-2">
-                <dt className="text-stone-500">{label}</dt>
+                <dt className="text-zinc-500">{label}</dt>
                 <dd className="wrap-break-word">{value}</dd>
               </div>
             ))}
           </dl>
           <Dashes />
-          <p className="text-stone-500">NOTES</p>
+          <p className="text-zinc-500">NOTES</p>
           <p className="line-clamp-5 min-h-10 whitespace-pre-wrap">
             {brief.notes.trim() || "—"}
           </p>
           <Dashes />
           <div className="grid grid-cols-[3.5rem_1fr] gap-2">
-            <span className="text-stone-500">TO</span>
+            <span className="text-zinc-500">TO</span>
             <span>Rutwik Shinde, Pune</span>
-            <span className="text-stone-500">STATUS</span>
+            <span className="text-zinc-500">STATUS</span>
             <span className={cn(isReady && "font-semibold text-orange-700")}>
               {isReady ? "ready to send ✓" : "filling in…"}
             </span>
           </div>
-          <p className="mt-4 text-center font-handwritten text-base text-stone-500">
+          <p className="mt-4 text-center font-handwritten text-base text-zinc-500">
             thank you, come again
           </p>
         </div>
@@ -370,7 +375,7 @@ const RECEIPT_EDGE_MASK =
 function Dashes() {
   return (
     <div
-      className="my-2.5 h-px bg-[linear-gradient(to_right,currentColor_50%,transparent_0)] bg-size-[6px_1px] text-stone-400"
+      className="my-2.5 h-px bg-[linear-gradient(to_right,currentColor_50%,transparent_0)] bg-size-[6px_1px] text-zinc-400"
       aria-hidden
     />
   )

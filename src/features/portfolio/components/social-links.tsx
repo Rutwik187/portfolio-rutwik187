@@ -11,7 +11,7 @@ import { SOCIAL_ICONS } from "@/features/portfolio/components/social-link-icons"
 import { SOCIAL_LINKS } from "@/features/portfolio/data/social-links"
 
 /** Icon buttons for my profiles, sized to sit next to the hero buttons. */
-export function SocialLinks() {
+export function SocialLinks({ size = "icon" }: { size?: "icon" | "icon-lg" }) {
   return (
     <ul className="flex flex-wrap gap-2" aria-label="Social links">
       {SOCIAL_LINKS.map((item) => (
@@ -22,7 +22,7 @@ export function SocialLinks() {
                 <Button
                   className="text-foreground/80 shadow-none [&_svg:not([class*='size-'])]:size-4.5"
                   variant="outline"
-                  size="icon"
+                  size={size}
                   nativeButton={false}
                   render={
                     <a

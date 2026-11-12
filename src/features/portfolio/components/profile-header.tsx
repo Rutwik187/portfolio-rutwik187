@@ -14,8 +14,10 @@ import { PuneStatus } from "./pune-status"
 /** The top of the home page: who I am and what I build, next to the terminal. */
 export function ProfileHeader() {
   return (
-    <section className="grid items-center gap-10 px-4 pt-10 sm:pt-16 lg:grid-cols-2 lg:gap-12 lg:pt-20">
+    <section className="grid items-center gap-12 px-4 pt-10 sm:pt-16 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)] lg:pt-24">
       <div className="min-w-0 space-y-8">
+        <AvailabilityBadge />
+
         <div className="flex items-center gap-4">
           <div className="relative size-18 shrink-0 rounded-full sm:size-20">
             <img
@@ -62,6 +64,11 @@ export function ProfileHeader() {
       </div>
 
       <figure className="relative min-w-0">
+        {/* A soft saffron light behind the terminal. */}
+        <div
+          className="pointer-events-none absolute -inset-x-10 -inset-y-12 -z-10 bg-[radial-gradient(closest-side,color-mix(in_oklab,var(--brand)_16%,transparent),transparent)]"
+          aria-hidden
+        />
         <HeroTerminal className="h-64 sm:h-72" />
 
         <HandwrittenNote
@@ -77,5 +84,17 @@ export function ProfileHeader() {
         </HandwrittenNote>
       </figure>
     </section>
+  )
+}
+
+function AvailabilityBadge() {
+  return (
+    <p className="inline-flex items-center gap-2 rounded-full border bg-background/60 py-1 pr-3 pl-2.5 text-sm text-muted-foreground backdrop-blur-sm">
+      <span className="relative flex size-2" aria-hidden>
+        <span className="absolute inline-flex size-full animate-ping rounded-full bg-success opacity-60 motion-reduce:hidden" />
+        <span className="relative inline-flex size-2 rounded-full bg-success" />
+      </span>
+      Available for freelance and full-time work
+    </p>
   )
 }

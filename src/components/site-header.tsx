@@ -8,6 +8,7 @@ import { GitHubIcon } from "@/components/icons"
 import { NavDesktop } from "@/components/nav-desktop"
 import { RutwikLogo } from "@/components/rutwik-mark"
 import { ThemeToggle } from "@/components/theme-toggle"
+import { XRayToggle } from "@/components/x-ray/x-ray-toggle"
 import { HireButton } from "@/features/portfolio/components/hire/hire-button"
 
 import { ScrollProgress } from "./scroll-progress"
@@ -56,11 +57,13 @@ export function SiteHeader() {
             orientation="vertical"
             className="mx-2 max-sm:hidden data-vertical:h-5 data-vertical:self-center"
           />
+          <XRayToggle />
           <ThemeToggle />
           <HireButton
             source="header"
             size="sm"
-            className="ml-2 bg-brand text-brand-foreground hover:bg-brand/85"
+            variant="brand"
+            className="ml-2"
           >
             Hire me
           </HireButton>

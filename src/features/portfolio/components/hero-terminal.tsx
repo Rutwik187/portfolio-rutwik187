@@ -10,6 +10,8 @@ import { useTheme } from "next-themes"
 import { fireConfetti } from "@/lib/confetti"
 import { trackEvent } from "@/lib/events"
 import { cn } from "@/lib/utils"
+import { askAgentAtom } from "@/components/agent/agent-state"
+import { useXRayToggle } from "@/components/x-ray/x-ray-controller"
 import { hireDialogOpenAtom } from "@/features/portfolio/components/hire/hire-state"
 import { workDialogAtom } from "@/features/portfolio/components/work/work-state"
 import { EXPERIENCES } from "@/features/portfolio/data/experiences"
@@ -33,6 +35,8 @@ type CommandContext = {
   navigate: (href: "/play") => void
   openHire: () => void
   openWork: (id: string) => void
+  toggleXRay: () => void
+  askAgent: (question: string) => void
 }
 
 type Command = {
@@ -66,7 +70,7 @@ function Accent({ children }: { children: React.ReactNode }) {
 }
 
 function Muted({ children }: { children: React.ReactNode }) {
-  return <span className="text-stone-400">{children}</span>
+  return <span className="text-zinc-400">{children}</span>
 }
 
 function ExternalLink({
@@ -81,7 +85,7 @@ function ExternalLink({
       href={href}
       target="_blank"
       rel="noopener"
-      className="underline decoration-stone-500 underline-offset-2 hover:text-orange-300 hover:decoration-orange-300"
+      className="underline decoration-zinc-500 underline-offset-2 hover:text-orange-300 hover:decoration-orange-300"
     >
       {children}
     </a>
@@ -126,7 +130,7 @@ const COMMANDS: Record<string, Command> = {
               <Muted>{command.description}</Muted>
             </div>
           ))}
-        <span className="col-span-2 mt-1 text-stone-500">
+        <span className="col-span-2 mt-1 text-zinc-500">
           There are a few hidden ones too. Good luck.
         </span>
       </div>
@@ -183,7 +187,7 @@ const COMMANDS: Record<string, Command> = {
             <button
               type="button"
               onClick={() => openWork(item.id)}
-              className="underline decoration-stone-500 underline-offset-2 hover:text-orange-300 hover:decoration-orange-300"
+              className="underline decoration-zinc-500 underline-offset-2 hover:text-orange-300 hover:decoration-orange-300"
             >
               {item.title}
             </button>{" "}
@@ -310,6 +314,32 @@ const COMMANDS: Record<string, Command> = {
       return <Muted>Switched to {next} mode.</Muted>
     },
   },
+  ask: {
+    description: "ask the agent, e.g. ask show me his AI work",
+    run: ({ args, askAgent }) => {
+      if (args.length === 0) {
+        return (
+          <Muted>
+            Try <Accent>ask is he available?</Accent>
+          </Muted>
+        )
+      }
+      askAgent(args.join(" "))
+      return <Muted>The agent is on it. Watch the page.</Muted>
+    },
+  },
+  xray: {
+    description: "see the code behind this page",
+    run: ({ toggleXRay }) => {
+      toggleXRay()
+      return (
+        <Muted>
+          Scanning the page… press <Accent>X</Accent> or <Accent>Esc</Accent> to
+          switch it off.
+        </Muted>
+      )
+    },
+  },
   snake: {
     description: "play a game, you deserve a break",
     run: ({ navigate }) => {
@@ -423,6 +453,8 @@ export function HeroTerminal({ className }: { className?: string }) {
   const { setTheme, resolvedTheme } = useTheme()
   const setHireOpen = useSetAtom(hireDialogOpenAtom)
   const setWorkDialog = useSetAtom(workDialogAtom)
+  const toggleXRay = useXRayToggle()
+  const askAgent = useSetAtom(askAgentAtom)
   const shouldReduceMotion = useReducedMotion()
 
   const [lines, setLines] = useState<Line[]>([])
@@ -478,6 +510,8 @@ export function HeroTerminal({ className }: { className?: string }) {
         navigate: (href) => router.push(href),
         openHire: () => setHireOpen(true),
         openWork: (id) => setWorkDialog({ id, open: true }),
+        toggleXRay: () => toggleXRay("terminal"),
+        askAgent,
       })
 
       if (name.toLowerCase() === "clear") return
@@ -486,7 +520,16 @@ export function HeroTerminal({ className }: { className?: string }) {
         pushLines({ kind: "output", content: output })
       }
     },
-    [pushLines, resolvedTheme, router, setTheme, setHireOpen, setWorkDialog]
+    [
+      pushLines,
+      resolvedTheme,
+      router,
+      setTheme,
+      setHireOpen,
+      setWorkDialog,
+      toggleXRay,
+      askAgent,
+    ]
   )
 
   // Boot sequence: type `whoami` like a person would, then hand over.
@@ -597,7 +640,7 @@ export function HeroTerminal({ className }: { className?: string }) {
   return (
     <div
       className={cn(
-        "flex flex-col overflow-hidden rounded-xl bg-stone-900 font-mono text-[0.8125rem]/relaxed text-stone-200 shadow-xl ring-1 shadow-stone-900/10 ring-stone-900/10 dark:bg-stone-900/70 dark:shadow-none dark:ring-white/10",
+        "flex flex-col overflow-hidden rounded-xl bg-zinc-900 font-mono text-[0.8125rem]/relaxed text-zinc-200 shadow-xl ring-1 shadow-zinc-900/10 ring-zinc-900/10 dark:bg-zinc-900/70 dark:shadow-none dark:ring-white/10",
         className
       )}
       onClick={() => {
@@ -608,14 +651,14 @@ export function HeroTerminal({ className }: { className?: string }) {
     >
       <div className="flex h-9 shrink-0 items-center gap-3 border-b border-white/10 px-3.5">
         <div className="flex gap-1.5" aria-hidden>
-          <span className="size-2.5 rounded-full bg-stone-600" />
-          <span className="size-2.5 rounded-full bg-stone-600" />
+          <span className="size-2.5 rounded-full bg-zinc-600" />
+          <span className="size-2.5 rounded-full bg-zinc-600" />
           <span className="size-2.5 rounded-full bg-orange-400" />
         </div>
-        <p className="flex-1 truncate text-center text-xs text-stone-400">
+        <p className="flex-1 truncate text-center text-xs text-zinc-400">
           rutwik@pune: ~
         </p>
-        <span className="text-xs text-stone-500" aria-hidden>
+        <span className="text-xs text-zinc-500" aria-hidden>
           zsh
         </span>
       </div>
@@ -654,7 +697,7 @@ export function HeroTerminal({ className }: { className?: string }) {
                 if (!isBooting) setInput(e.target.value)
               }}
               onKeyDown={handleKeyDown}
-              className="peer w-full min-w-0 bg-transparent text-stone-100 caret-transparent outline-none"
+              className="peer w-full min-w-0 bg-transparent text-zinc-100 caret-transparent outline-none"
               autoComplete="off"
               autoCapitalize="off"
               autoCorrect="off"
