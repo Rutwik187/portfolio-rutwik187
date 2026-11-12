@@ -36,10 +36,10 @@ export function ProjectItem({
     <Collapsible className={className} defaultOpen={project.isExpanded}>
       {/* Only the title is the trigger (accordion pattern); its overlay keeps
           the whole row clickable, while the project link sits above it. */}
-      <div className="relative flex items-center hover:bg-accent-muted">
-        <IconTile className="mx-4">{project.icon ?? <BoxIcon />}</IconTile>
+      <div className="relative -mx-2 flex items-center rounded-lg px-2 hover:bg-accent-muted">
+        <IconTile className="mr-4">{project.icon ?? <BoxIcon />}</IconTile>
 
-        <div className="flex flex-1 items-center gap-2 border-l border-dashed border-line p-4">
+        <div className="flex flex-1 items-center gap-2 py-4">
           <div className="flex-1">
             <h3 className="mb-1 leading-snug font-medium text-balance">
               <CollapsibleTrigger className="text-left">
@@ -95,7 +95,7 @@ export function ProjectItem({
       </div>
 
       <CollapsibleContent className="overflow-hidden">
-        <div className="space-y-4 border-t border-line p-4">
+        <div className="space-y-4 pb-4 pl-12">
           {project.description && (
             <div className="typeset typeset-description">
               <Markdown>{project.description}</Markdown>

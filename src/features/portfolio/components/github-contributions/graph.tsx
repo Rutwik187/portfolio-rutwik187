@@ -35,7 +35,7 @@ export function GitHubContributionGraph({
   return (
     <figure>
       <ContributionGraph
-        className="mx-auto gap-4 py-4"
+        className="mx-auto gap-4 py-4 lg:w-full lg:py-6"
         data={data}
         blockSize={12}
         blockMargin={2}
@@ -43,7 +43,7 @@ export function GitHubContributionGraph({
         aria-label="GitHub Contributions Graph"
       >
         <ContributionGraphCalendar
-          className="px-4 **:data-[slot=month-labels]:text-muted-foreground"
+          className="px-4 **:data-[slot=month-labels]:text-muted-foreground lg:[&>svg]:h-auto lg:[&>svg]:w-full"
           title="GitHub Contributions"
           aria-hidden
         >

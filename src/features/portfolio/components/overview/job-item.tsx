@@ -24,7 +24,7 @@ export function JobItem({
   experienceId,
 }: JobItemProps) {
   return (
-    <IntroItem className="sm:col-span-2">
+    <IntroItem className="sm:col-span-2 lg:col-span-1">
       <IntroItemIcon>{getJobIcon(title)}</IntroItemIcon>
 
       <IntroItemContent>

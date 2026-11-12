@@ -145,6 +145,8 @@ export function SnakeGame({ className }: { className?: string }) {
 
     const dpr = Math.min(window.devicePixelRatio || 1, 2)
     const width = canvas.clientWidth
+    // A zero-width board (mid-layout or hidden) gives negative square sizes.
+    if (width === 0) return
     const cell = width / COLS
     const height = cell * ROWS
 

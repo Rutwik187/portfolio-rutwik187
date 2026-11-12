@@ -20,12 +20,12 @@ export const META_THEME_COLORS = {
 /** Sections on the home page; the header links jump to them. */
 export const MAIN_NAV: NavItem<Route>[] = [
   {
-    title: "About",
-    href: "/#about",
-  },
-  {
     title: "Work",
     href: "/#work",
+  },
+  {
+    title: "About",
+    href: "/#about",
   },
   {
     title: "Experience",

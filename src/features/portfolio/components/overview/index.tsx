@@ -15,10 +15,10 @@ import { JobItem } from "./job-item"
 
 export function Overview() {
   return (
-    <Panel className="screen-line-bottom-none screen-line-top-none">
+    <Panel className="mt-10 sm:mt-12">
       <h2 className="sr-only">Overview</h2>
 
-      <PanelContent className="grid gap-x-4 gap-y-2.5 sm:grid-cols-2">
+      <PanelContent className="grid gap-x-4 gap-y-2.5 sm:grid-cols-2 lg:gap-x-12">
         {USER.jobs.map((job, index) => {
           return (
             <JobItem
@@ -45,12 +45,10 @@ export function Overview() {
           </IntroItemContent>
         </IntroItem>
 
-        <CurrentLocalTimeItem timeZone={USER.timeZone} />
-
         <EmailItem emailB64={USER.emailB64} />
-      </PanelContent>
 
-      <div className="pointer-events-none absolute inset-y-0 left-1/2 -z-1 w-px -translate-x-2.25 border-r border-dashed border-line max-sm:hidden" />
+        <CurrentLocalTimeItem timeZone={USER.timeZone} />
+      </PanelContent>
     </Panel>
   )
 }

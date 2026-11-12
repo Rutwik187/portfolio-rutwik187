@@ -15,58 +15,58 @@ export function TechStack() {
         </PanelTitle>
       </PanelHeader>
 
-      <div className="relative [--badge-height:--spacing(6)] [--col-left-width:--spacing(48)]">
-        <div
-          className="pointer-events-none absolute inset-y-0 left-(--col-left-width) -z-1 w-px border-r border-dashed border-line max-sm:hidden"
-          aria-hidden
-        />
+      <div className="[--badge-height:--spacing(6)] [--col-left-width:--spacing(36)] lg:[--col-left-width:--spacing(28)]">
+        <div className="pt-2 lg:grid lg:grid-cols-2 lg:gap-x-12">
+          {Object.entries(groupByCategory(TECH_STACK)).map(
+            ([category, items], index) => {
+              const categoryId = `${ID}-${category
+                .toLowerCase()
+                .replace(/[^a-z0-9]+/g, "-")
+                .replace(/(^-|-$)/g, "")}`
 
-        {Object.entries(groupByCategory(TECH_STACK)).map(
-          ([category, items], index) => {
-            const categoryId = `${ID}-${category
-              .toLowerCase()
-              .replace(/[^a-z0-9]+/g, "-")
-              .replace(/(^-|-$)/g, "")}`
-
-            return (
-              <div
-                key={category}
-                className="grid items-start gap-y-2 border-b border-line py-4 last:border-none sm:grid-cols-[var(--col-left-width)_1fr]"
-              >
-                <div id={categoryId} className="pl-4 text-sm/(--badge-height)">
-                  <span
-                    className="mr-1.5 font-mono text-muted-foreground/80 select-none"
-                    aria-hidden
-                  >
-                    {(index + 1).toString().padStart(2, "0")}
-                  </span>
-                  {category}
-                </div>
-
-                <ul
-                  aria-labelledby={categoryId}
-                  className="flex flex-wrap gap-1.5 px-4"
+              return (
+                <div
+                  key={category}
+                  className="grid items-start gap-y-2 py-3 sm:grid-cols-[var(--col-left-width)_1fr]"
                 >
-                  {items.map((item) => {
-                    return (
-                      <li key={item.key} className="flex">
-                        <a
-                          href={item.href}
-                          target="_blank"
-                          rel="noopener"
-                          className="flex h-(--badge-height) items-center justify-center gap-1.25 rounded-full bg-stone-50/80 px-2 font-mono font-features-['ss01','ss03','zero'] text-xs text-foreground inset-ring-1 inset-ring-border dark:bg-stone-900/80 [&_svg]:pointer-events-none [&_svg]:size-3.5 [&_svg]:shrink-0 [&_svg]:text-muted-foreground/80"
-                        >
-                          {item.icon}
-                          {item.title}
-                        </a>
-                      </li>
-                    )
-                  })}
-                </ul>
-              </div>
-            )
-          }
-        )}
+                  <div
+                    id={categoryId}
+                    className="pl-4 text-sm/(--badge-height)"
+                  >
+                    <span
+                      className="mr-1.5 font-mono text-muted-foreground/80 select-none"
+                      aria-hidden
+                    >
+                      {(index + 1).toString().padStart(2, "0")}
+                    </span>
+                    {category}
+                  </div>
+
+                  <ul
+                    aria-labelledby={categoryId}
+                    className="flex flex-wrap gap-1.5 px-4"
+                  >
+                    {items.map((item) => {
+                      return (
+                        <li key={item.key} className="flex">
+                          <a
+                            href={item.href}
+                            target="_blank"
+                            rel="noopener"
+                            className="flex h-(--badge-height) items-center justify-center gap-1.25 rounded-full bg-stone-50/80 px-2 font-mono font-features-['ss01','ss03','zero'] text-xs text-foreground inset-ring-1 inset-ring-border dark:bg-stone-900/80 [&_svg]:pointer-events-none [&_svg]:size-3.5 [&_svg]:shrink-0 [&_svg]:text-muted-foreground/80"
+                          >
+                            {item.icon}
+                            {item.title}
+                          </a>
+                        </li>
+                      )
+                    })}
+                  </ul>
+                </div>
+              )
+            }
+          )}
+        </div>
       </div>
     </Panel>
   )

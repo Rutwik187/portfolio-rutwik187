@@ -38,9 +38,7 @@ export const metadata: Metadata = {
 
 export default function PlayPage() {
   return (
-    <div className="mx-auto md:max-w-3xl">
-      <div className="ruler-divider h-8 border-x" aria-hidden />
-
+    <div className="mx-auto pt-10 sm:pt-16 md:max-w-3xl lg:max-w-5xl">
       <Panel>
         <PanelHeader>
           <PanelTitle as="h1">
@@ -62,7 +60,10 @@ export default function PlayPage() {
 
       <Panel className="py-4">
         <h2 className="sr-only">Game</h2>
-        <SnakeGame />
+        {/* The page column is wide; keep the whole board on a laptop screen. */}
+        <div className="mx-auto max-w-3xl">
+          <SnakeGame />
+        </div>
       </Panel>
     </div>
   )

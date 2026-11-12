@@ -16,8 +16,8 @@ const CommandMenu = dynamic(() => import("@/components/command-menu"))
 
 export function SiteHeader() {
   return (
-    <header className="sticky top-0 z-50 max-w-screen overflow-x-clip bg-background/90 px-2 backdrop-blur-md">
-      <div className="screen-line-top screen-line-bottom mx-auto flex h-(--header-height) items-center gap-2 border-x screen-line-bottom-border screen-line-top-border pr-2 pl-4 after:z-1 sm:gap-4 md:max-w-3xl">
+    <header className="sticky top-0 z-50 max-w-screen overflow-x-clip border-b border-line bg-background/85 px-2 backdrop-blur-md">
+      <div className="mx-auto flex h-(--header-height) items-center gap-2 pr-2 pl-4 sm:gap-4 md:max-w-3xl lg:max-w-5xl">
         <Link href="/" aria-label="Home" className="shrink-0">
           <RutwikLogo />
         </Link>
