@@ -133,8 +133,16 @@ export function AgentPrompt() {
           className="flex flex-wrap gap-2 px-3 pb-3"
           aria-label="Example questions"
         >
-          {SUGGESTIONS.map(({ icon: Icon, label, question }) => (
-            <li key={label} className="shrink-0">
+          {SUGGESTIONS.map(({ icon: Icon, label, question }, index) => (
+            <li
+              key={label}
+              className={cn(
+                "shrink-0",
+                // In the hero's narrow column on laptops, four chips wrap to
+                // a second row. The last one, the code, is also in the header.
+                index === SUGGESTIONS.length - 1 && "lg:max-[90rem]:hidden"
+              )}
+            >
               <button
                 type="button"
                 onClick={() => ask(question)}
