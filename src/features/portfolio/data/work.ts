@@ -675,8 +675,9 @@ const PRIYAM: Work = {
   shots: [
     {
       src: priyamHome,
-      alt: "Home with search, a banner, categories and best sellers",
-      caption: "Home: search, banners, categories, best sellers.",
+      alt: "Home with the verified business, search, a banner for the customer's own prices, and categories",
+      caption:
+        "Home: a verified account, its own prices, categories. Demo data.",
       device: "phone",
     },
     {
@@ -693,8 +694,8 @@ const PRIYAM: Work = {
     },
     {
       src: priyamCart,
-      alt: "Cart with three items and quantity steppers",
-      caption: "Cart with quantity steppers.",
+      alt: "Cart with three items, quantity steppers, a coupon and the total with GST",
+      caption: "Cart with quantity steppers and a coupon.",
       device: "phone",
     },
     {
@@ -711,8 +712,8 @@ const PRIYAM: Work = {
     },
     {
       src: priyamOrders,
-      alt: "My orders with status chips and GST breakdown",
-      caption: "Order history with status.",
+      alt: "My orders with status chips and the progress of a shipped order",
+      caption: "Order history with status and progress.",
       device: "phone",
     },
     {
