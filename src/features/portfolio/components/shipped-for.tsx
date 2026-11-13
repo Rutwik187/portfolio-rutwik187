@@ -12,10 +12,7 @@ export function ShippedFor() {
 
   return (
     <section className="px-4 pt-16 sm:pt-20" aria-labelledby="shipped-for">
-      <h2
-        id="shipped-for"
-        className="font-mono text-xs tracking-widest text-muted-foreground uppercase"
-      >
+      <h2 id="shipped-for" className="text-sm text-muted-foreground">
         Shipped for
       </h2>
 
@@ -36,7 +33,7 @@ export function ShippedFor() {
               >
                 {name}
                 {place && place !== HOME_CITY && (
-                  <span className="ml-1.5 rounded-sm bg-brand/12 px-1 py-px align-middle font-mono text-[0.6875rem] font-medium tracking-wider text-brand-strong">
+                  <span className="ml-1.5 align-middle text-sm font-normal text-muted-foreground">
                     {place}
                   </span>
                 )}

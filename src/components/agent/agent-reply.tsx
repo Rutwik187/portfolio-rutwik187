@@ -61,7 +61,7 @@ export function AgentReplyView({
                 <button
                   type="button"
                   onClick={() => onRevisit(source.target)}
-                  className="group inline-flex items-center gap-1 rounded-md bg-muted/70 py-0.5 pr-1.5 pl-2 text-xs text-foreground transition-colors hover:bg-brand/10 hover:text-brand-strong"
+                  className="group inline-flex items-center gap-1 rounded-full border border-rule-2 py-0.5 pr-2 pl-2.5 text-xs text-foreground transition-colors duration-150 hover:bg-paper-3"
                 >
                   {source.label}
                   <ArrowUpRightIcon
@@ -91,7 +91,7 @@ export function AgentMark({
   return (
     <span
       className={cn(
-        "relative flex size-6 shrink-0 items-center justify-center rounded-full bg-brand/12 text-brand-strong ring-1 ring-brand/25",
+        "relative flex size-6 shrink-0 items-center justify-center rounded-full border border-rule-2 text-brand-strong",
         className
       )}
       aria-hidden
@@ -175,10 +175,10 @@ function Trace({ reply }: { reply: AgentReply }) {
             transition={SPRING}
             className="overflow-hidden"
           >
-            <div className="mt-2 space-y-1.5 rounded-xl bg-muted/60 p-3 font-mono text-xs">
+            <div className="mt-2 space-y-1.5 rounded-[10px] border border-rule bg-paper-2 p-3 text-xs">
               <p className="flex gap-2 text-muted-foreground">
-                <span>intent</span>
-                <span className="truncate text-sky-700 dark:text-sky-400">
+                <span>Intent</span>
+                <span className="truncate font-mono text-info">
                   {reply.intent}
                 </span>
                 <span className="ml-auto shrink-0 tabular-nums">

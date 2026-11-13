@@ -76,9 +76,9 @@ const DEFAULT_LABELS: Labels = {
 
 const THEME = cn(
   'data-[level="0"]:fill-muted-foreground/8',
-  'data-[level="1"]:fill-brand/25',
-  'data-[level="2"]:fill-brand/50',
-  'data-[level="3"]:fill-brand/75',
+  'data-[level="1"]:fill-ink-2/22',
+  'data-[level="2"]:fill-ink-2/42',
+  'data-[level="3"]:fill-ink-2/68',
   'data-[level="4"]:fill-brand'
 )
 

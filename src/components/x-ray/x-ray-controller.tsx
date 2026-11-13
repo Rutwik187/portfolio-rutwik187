@@ -228,12 +228,12 @@ export function XRayController() {
     <>
       <div
         ref={ringRef}
-        className="pointer-events-none fixed top-0 left-0 z-40 rounded-full border border-brand/80 opacity-0 shadow-[0_0_0_4px_color-mix(in_oklab,var(--brand)_12%,transparent),0_0_60px_-8px_var(--brand)] transition-opacity duration-200"
+        className="pointer-events-none fixed top-0 left-0 z-40 rounded-full border border-brand opacity-0 transition-opacity duration-200"
         aria-hidden
       >
         <span
           ref={labelRef}
-          className="absolute top-full left-1/2 mt-2.5 -translate-x-1/2 rounded-md bg-brand px-1.5 py-0.5 font-mono text-[0.6875rem] font-medium whitespace-nowrap text-brand-foreground opacity-0 transition-opacity"
+          className="absolute top-full left-1/2 mt-2.5 -translate-x-1/2 rounded-md bg-brand px-1.5 py-0.5 font-mono text-xs whitespace-nowrap text-brand-foreground opacity-0 transition-opacity"
         />
       </div>
 
@@ -275,22 +275,26 @@ function XRayStatusBar({
     <div className="pointer-events-none fixed inset-x-0 bottom-[calc(--spacing(18)+env(safe-area-inset-bottom,0))] z-50 flex justify-center px-3 sm:bottom-6">
       <div
         role="status"
-        className="pointer-events-auto flex max-w-full items-center gap-3 rounded-full border bg-background/85 py-1.5 pr-1.5 pl-3.5 font-mono text-xs shadow-lg backdrop-blur-md"
+        className="pointer-events-auto flex max-w-full items-center gap-3 rounded-full border border-rule-2 bg-paper-2 py-1.5 pr-1.5 pl-3.5 text-sm"
       >
         <span className="flex shrink-0 items-center gap-1.5 font-medium text-brand-strong">
           <ScanEyeIcon className="size-4" aria-hidden />
-          X-RAY
+          X-ray
         </span>
 
         <span className="truncate text-muted-foreground">
           {data ? (
             <>
-              {Object.keys(data.sections).length} components ·{" "}
+              {Object.keys(data.sections).length} components,{" "}
               {data.totalLines.toLocaleString("en-IN")} lines of TSX
               <span className="max-md:hidden">
-                {" "}
-                · built {builtOn}
-                {data.commit && ` · ${data.commit}`}
+                , built on {builtOn}
+                {data.commit && (
+                  <>
+                    {" "}
+                    from <code className="font-mono">{data.commit}</code>
+                  </>
+                )}
               </span>
             </>
           ) : (

@@ -35,15 +35,15 @@ export function GitHubContributionGraph({
   return (
     <figure>
       <ContributionGraph
-        className="mx-auto gap-4 py-4 lg:w-full lg:py-6"
+        className="mx-auto gap-4 lg:w-full"
         data={data}
-        blockSize={12}
-        blockMargin={2}
-        blockRadius={2}
+        blockSize={20}
+        blockMargin={4}
+        blockRadius={3}
         aria-label="GitHub Contributions Graph"
       >
         <ContributionGraphCalendar
-          className="px-4 **:data-[slot=month-labels]:text-muted-foreground lg:[&>svg]:h-auto lg:[&>svg]:w-full"
+          className="**:data-[slot=month-labels]:text-muted-foreground"
           title="GitHub Contributions"
           aria-hidden
         >
@@ -70,12 +70,12 @@ export function GitHubContributionGraph({
           )}
         </ContributionGraphCalendar>
 
-        <ContributionGraphFooter className="px-4 text-sm">
+        <ContributionGraphFooter className="text-sm text-muted-foreground">
           <ContributionGraphTotalCount>
             {({ totalCount }) => (
               <figcaption className="text-pretty tabular-nums">
                 {formatNumber(totalCount)} contributions,{" "}
-                {format(parseISO(data[0].date), "d MMM yyyy")} –{" "}
+                {format(parseISO(data[0].date), "d MMM yyyy")} to{" "}
                 {format(parseISO(data[data.length - 1].date), "d MMM yyyy")}.
                 Source:{" "}
                 <a

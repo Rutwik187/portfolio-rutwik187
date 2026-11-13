@@ -11,11 +11,11 @@ import { xRayDataAtom, xRayPhaseAtom } from "./x-ray-state"
 
 const TOKEN_CLASS: Record<TokenType, string> = {
   comment: "text-muted-foreground/70 italic",
-  string: "text-amber-700 dark:text-amber-300",
+  string: "text-success",
   tag: "text-brand-strong",
-  keyword: "text-sky-700 dark:text-sky-400",
-  number: "text-emerald-700 dark:text-emerald-400",
-  attr: "text-violet-700 dark:text-violet-300",
+  keyword: "text-info",
+  number: "text-brand-strong",
+  attr: "text-ink-2",
   plain: "text-foreground/85",
 }
 

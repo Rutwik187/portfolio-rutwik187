@@ -9,13 +9,10 @@ import { AgentChat } from "@/components/agent/agent-chat"
 import { XRayController } from "@/components/x-ray/x-ray-controller"
 import { XRaySection } from "@/components/x-ray/x-ray-section"
 import { Contact } from "@/features/portfolio/components/contact"
-import { Education } from "@/features/portfolio/components/education"
 import { Experiences } from "@/features/portfolio/components/experiences"
-import { GitHubContributions } from "@/features/portfolio/components/github-contributions"
 import { Hello } from "@/features/portfolio/components/hello"
 import { ProfileHeader } from "@/features/portfolio/components/profile-header"
 import { Projects } from "@/features/portfolio/components/projects"
-import { ShippedFor } from "@/features/portfolio/components/shipped-for"
 import { TechStack } from "@/features/portfolio/components/tech-stack"
 import { Work } from "@/features/portfolio/components/work"
 import { USER } from "@/features/portfolio/data/user"
@@ -33,58 +30,40 @@ export default function HomePage() {
       <XRayController />
       <AgentChat catalog={getAgentCatalog()} />
 
-      <div className="relative isolate **:data-[slot=panel]:scroll-mt-[calc(var(--header-height)+(--spacing(8)))]">
-        <div
-          className="pointer-events-none absolute -inset-x-2 top-0 -z-10 h-192 hero-glow"
-          aria-hidden
-        />
+      <div className="relative isolate">
+        <XRaySection id="hero">
+          <ProfileHeader />
+        </XRaySection>
 
-        <div className="mx-auto md:max-w-3xl lg:max-w-5xl">
-          <XRaySection id="hero">
-            <ProfileHeader />
-          </XRaySection>
-          <XRaySection id="clients">
-            <ShippedFor />
-          </XRaySection>
-          <SectionGap />
+        <SectionGap size="s" />
+        <XRaySection id="work">
+          <Work />
+        </XRaySection>
 
-          <XRaySection id="work">
-            <Work />
-          </XRaySection>
-          <SectionGap />
+        <SectionGap size="l" />
+        <XRaySection id="stack">
+          <TechStack />
+        </XRaySection>
 
-          <XRaySection id="about">
-            <Hello />
-          </XRaySection>
-          <XRaySection id="github">
-            <GitHubContributions />
-          </XRaySection>
-          <SectionGap />
+        <SectionGap size="m" />
+        <XRaySection id="experience">
+          <Experiences />
+        </XRaySection>
 
-          <XRaySection id="experience">
-            <Experiences />
-          </XRaySection>
-          <SectionGap />
+        <SectionGap size="m" />
+        <XRaySection id="about">
+          <Hello />
+        </XRaySection>
 
-          <XRaySection id="stack">
-            <TechStack />
-          </XRaySection>
-          <SectionGap />
+        <SectionGap size="m" />
+        <XRaySection id="projects">
+          <Projects />
+        </XRaySection>
 
-          <XRaySection id="projects">
-            <Projects />
-          </XRaySection>
-          <SectionGap />
-
-          <XRaySection id="education">
-            <Education />
-          </XRaySection>
-          <SectionGap />
-
-          <XRaySection id="contact">
-            <Contact />
-          </XRaySection>
-        </div>
+        <SectionGap size="l" />
+        <XRaySection id="contact">
+          <Contact />
+        </XRaySection>
       </div>
     </>
   )
@@ -103,7 +82,21 @@ function getProfilePageJsonLd(): WithContext<ProfilePage> {
   }
 }
 
-/** Space between sections. Whitespace, not a line, keeps the page calm. */
-function SectionGap() {
-  return <div className="h-16 sm:h-24" aria-hidden />
+/**
+ * Space between sections, in three steps (120, 144 and 176px at desktop
+ * sizes), mixed so the seams do not all read the same.
+ */
+function SectionGap({ size }: { size: "s" | "m" | "l" }) {
+  return (
+    <div
+      className={
+        size === "s"
+          ? "h-16 lg:h-30"
+          : size === "m"
+            ? "h-20 lg:h-36"
+            : "h-24 lg:h-44"
+      }
+      aria-hidden
+    />
+  )
 }

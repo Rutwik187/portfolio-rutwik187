@@ -40,8 +40,8 @@ export function RutwikMark({
 export function RutwikLogo({ className }: { className?: string }) {
   return (
     <span className={cn("flex items-center gap-2", className)}>
-      <RutwikMark blink />
-      <span className="font-mono text-[0.9375rem] font-medium tracking-tight">
+      <RutwikMark />
+      <span className="font-mono text-[0.9375rem] font-medium">
         <span className="text-muted-foreground">~/</span>rutwik
       </span>
     </span>

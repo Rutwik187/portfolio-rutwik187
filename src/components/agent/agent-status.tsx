@@ -39,7 +39,7 @@ export function AgentStatusCard({
       style={{ transformOrigin: "bottom right" }}
       className={cn(
         DOCK_POSITION,
-        "z-60 rounded-2xl border bg-popover/95 p-3 shadow-2xl ring-1 ring-black/5 backdrop-blur-xl sm:w-88 dark:ring-white/5"
+        "z-60 rounded-[14px] border border-rule-2 bg-popover p-3 shadow-card sm:w-88 dark:shadow-none"
       )}
     >
       <div className="flex items-center gap-2.5">
@@ -125,9 +125,9 @@ export function AgentLauncher({
       animate={{ opacity: 1, y: 0, scale: 1 }}
       exit={{ opacity: 0, y: 12, scale: 0.9 }}
       transition={SPRING}
-      // Beside the scroll-to-top button on larger screens; bottom left on
-      // phones, clear of the bottom nav.
-      className="fixed bottom-[calc(--spacing(2)+env(safe-area-inset-bottom,0))] left-3 z-50 flex h-10 items-center gap-2 rounded-xl bg-popover pr-3 pl-2.5 text-sm font-medium text-foreground shadow-md ring ring-foreground/10 transition-colors hover:bg-accent sm:right-14 sm:bottom-4 sm:left-auto sm:h-8 sm:rounded-lg sm:pr-1.5 lg:right-18 lg:bottom-8 dark:ring-foreground/20"
+      // Beside the scroll-to-top button. Phones open the chat from the
+      // bottom bar instead.
+      className="fixed bottom-[calc(--spacing(2)+env(safe-area-inset-bottom,0))] left-3 z-50 flex h-11 items-center gap-2 rounded-full border border-rule-2 bg-popover pr-2 pl-4 text-sm font-medium text-foreground lowercase transition-colors hover:bg-accent max-sm:hidden sm:right-16 sm:bottom-4 sm:left-auto lg:right-20 lg:bottom-8"
     >
       <span className="relative flex size-4 items-center justify-center">
         <SparklesIcon

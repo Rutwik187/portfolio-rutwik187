@@ -7,7 +7,7 @@ function Tag({ className, ...props }: React.ComponentProps<"span">) {
     <span
       data-slot="tag"
       className={cn(
-        "inline-flex items-center rounded-full border bg-zinc-50 px-1.5 py-0.5 font-mono font-features-['ss01','ss03','zero'] text-xs text-muted-foreground dark:bg-zinc-900",
+        "inline-flex items-center rounded-full border border-rule px-2.5 py-0.5 text-[0.8125rem] text-muted-foreground",
         "[&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-3.5",
         className
       )}

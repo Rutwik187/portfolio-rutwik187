@@ -107,7 +107,7 @@ export function AgentChatPanel({
       }}
       className={cn(
         DOCK_POSITION,
-        "z-60 flex max-h-[calc(100dvh-var(--header-height)-(--spacing(4)))] flex-col overflow-hidden rounded-2xl border bg-popover/95 shadow-2xl ring-1 ring-black/5 backdrop-blur-xl sm:max-h-[min(40rem,calc(100dvh-var(--header-height)-(--spacing(8))))] sm:w-100 dark:ring-white/5"
+        "z-60 flex max-h-[calc(100dvh-var(--header-height)-(--spacing(4)))] flex-col overflow-hidden rounded-[14px] border border-rule-2 bg-popover shadow-card sm:max-h-[min(40rem,calc(100dvh-var(--header-height)-(--spacing(8))))] sm:w-100 dark:shadow-none"
       )}
     >
       <header className="flex items-center gap-3 px-4 pt-3.5 pb-3">
@@ -197,7 +197,7 @@ export function AgentChatPanel({
                   <button
                     type="button"
                     onClick={() => ask(question)}
-                    className="rounded-full border bg-background/60 px-2.5 py-1 text-left text-xs text-muted-foreground transition-[color,border-color,background-color] hover:border-brand/40 hover:bg-brand/5 hover:text-foreground"
+                    className="rounded-full border border-rule-2 px-3 py-1.5 text-left text-sm text-muted-foreground transition-colors duration-150 hover:bg-paper-3 hover:text-foreground"
                   >
                     {question}
                   </button>
@@ -229,7 +229,7 @@ function Welcome({ onAsk }: { onAsk: (question: string) => void }) {
   return (
     <div className="pt-1">
       <div className="flex gap-2.5">
-        <span className="mt-0.5 flex size-6 shrink-0 items-center justify-center rounded-full bg-brand/12 text-brand-strong ring-1 ring-brand/25">
+        <span className="mt-0.5 flex size-6 shrink-0 items-center justify-center text-brand-strong">
           <SparklesIcon className="size-3.5" aria-hidden />
         </span>
         <p className="text-sm/relaxed text-pretty text-foreground">
@@ -249,7 +249,7 @@ function Welcome({ onAsk }: { onAsk: (question: string) => void }) {
             <button
               type="button"
               onClick={() => onAsk(text)}
-              className="group flex w-full items-center gap-3 rounded-xl border bg-background/50 px-3 py-2.5 text-left text-sm text-foreground transition-[border-color,background-color] hover:border-brand/35 hover:bg-brand/5"
+              className="group flex w-full items-center gap-3 rounded-[10px] border border-rule px-3 py-2.5 text-left text-sm text-foreground transition-colors duration-150 hover:bg-paper-3"
             >
               <Icon
                 className="size-4 shrink-0 text-muted-foreground transition-colors group-hover:text-brand-strong"
@@ -271,7 +271,7 @@ function Welcome({ onAsk }: { onAsk: (question: string) => void }) {
 function UserBubble({ text }: { text: string }) {
   return (
     <div className="flex justify-end pl-10">
-      <p className="rounded-2xl rounded-br-md bg-muted px-3.5 py-2 text-sm/relaxed text-pretty wrap-break-word text-foreground">
+      <p className="rounded-[14px] rounded-br-[4px] bg-paper-3 px-3.5 py-2 text-sm/relaxed text-pretty wrap-break-word text-foreground">
         {text}
       </p>
     </div>
@@ -372,11 +372,15 @@ function Composer({
               disabled={!canSend}
               aria-label="Send"
               initial={{ opacity: 0, scale: 0.6 }}
-              // Motion owns opacity here, so the dimmed state lives here too.
-              animate={{ opacity: canSend ? 1 : 0.35, scale: 1 }}
+              animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.6 }}
               transition={{ duration: 0.15 }}
-              className="flex size-8 shrink-0 items-center justify-center rounded-lg bg-brand text-brand-foreground transition-[opacity,transform] hover:brightness-105 active:scale-95"
+              className={cn(
+                "flex size-8 shrink-0 items-center justify-center rounded-lg transition-[background-color,color,box-shadow,scale] duration-200 active:scale-95",
+                canSend
+                  ? "bg-brand text-brand-foreground shadow-md shadow-brand/30"
+                  : "bg-muted text-muted-foreground"
+              )}
             >
               <ArrowUpIcon className="size-4" aria-hidden />
             </motion.button>

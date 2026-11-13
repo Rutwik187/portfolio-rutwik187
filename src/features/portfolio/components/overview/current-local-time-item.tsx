@@ -113,8 +113,8 @@ function computeClock(timeZone: string) {
   const hoursDiff = Math.abs(targetOffset - viewerOffset) / 60
   const diff =
     hoursDiff < 1
-      ? " // same time"
-      : ` // ${Math.floor(hoursDiff)}h ${targetOffset > viewerOffset ? "ahead" : "behind"}`
+      ? " (the same as yours)"
+      : ` (${Math.floor(hoursDiff)}h ${targetOffset > viewerOffset ? "ahead of" : "behind"} you)`
 
   return { time, hour, minute, diff }
 }

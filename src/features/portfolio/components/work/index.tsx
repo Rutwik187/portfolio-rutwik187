@@ -1,32 +1,22 @@
-import { WORK } from "../../data/work"
-import {
-  Panel,
-  PanelDescription,
-  PanelHeader,
-  PanelTitle,
-  PanelTitleSup,
-} from "../panel"
-import { PanelTitleCopy } from "../panel-title-copy"
+import { SectionHead } from "../section-head"
+import { WorkCase } from "./work-case"
 import { WorkList } from "./work-list"
 
 const ID = "work"
 
 export function Work() {
   return (
-    <Panel id={ID}>
-      <PanelHeader>
-        <PanelTitle>
-          <a href={`#${ID}`}>Selected work</a>
-          <PanelTitleSup>({WORK.length})</PanelTitleSup>
-          <PanelTitleCopy id={ID} />
-        </PanelTitle>
-        <PanelDescription>
-          Client products I built and shipped. Open one for screenshots and how
-          it works.
-        </PanelDescription>
-      </PanelHeader>
+    <section id={ID} aria-labelledby={`${ID}-title`} className="page-container">
+      <SectionHead
+        id={`${ID}-title`}
+        href={`#${ID}`}
+        title="Six products for six clients"
+        line="Client products I built and shipped. Open one for screenshots and how it works."
+      />
 
       <WorkList />
-    </Panel>
+
+      <WorkCase />
+    </section>
   )
 }

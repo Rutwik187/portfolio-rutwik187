@@ -8,10 +8,6 @@ export const X_RAY_SECTIONS = {
     component: "ProfileHeader",
     file: "src/features/portfolio/components/profile-header.tsx",
   },
-  clients: {
-    component: "ShippedFor",
-    file: "src/features/portfolio/components/shipped-for.tsx",
-  },
   work: {
     component: "WorkList",
     file: "src/features/portfolio/components/work/work-list.tsx",

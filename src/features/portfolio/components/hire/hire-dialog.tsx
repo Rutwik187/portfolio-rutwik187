@@ -134,7 +134,7 @@ export function HireDialog() {
             }}
           >
             <div className="space-y-1.5 pr-8">
-              <DialogTitle className="text-2xl font-semibold tracking-tight">
+              <DialogTitle className="font-display text-display-s tracking-display lowercase">
                 Start a project brief
               </DialogTitle>
               <DialogDescription className="text-sm text-pretty">
@@ -305,7 +305,7 @@ function ChipGroup({
   )
 }
 
-/** A printed receipt that mirrors the brief as it is filled in. */
+/** The brief as it will arrive, filled in live as the visitor chooses. */
 function BriefReceipt({
   brief,
   date,
@@ -316,67 +316,58 @@ function BriefReceipt({
   isReady: boolean
 }) {
   const rows: [string, string][] = [
-    ["FROM", [brief.name, brief.company].filter(Boolean).join(", ") || "—"],
-    ["NEED", brief.needs.join(", ") || "—"],
-    ["TYPE", brief.engagement],
-    ["WHEN", brief.timeline],
+    ["From", [brief.name, brief.company].filter(Boolean).join(", ")],
+    ["Needs", brief.needs.join(", ")],
+    ["Type", brief.engagement],
+    ["When", brief.timeline],
+    ["Notes", brief.notes.trim()],
   ]
 
   return (
-    <div className="flex items-start justify-center border-line bg-muted/50 dot-grid p-5 max-md:border-t sm:p-6 md:border-l">
-      {/* The mask clips box shadows, so the shadow lives on a wrapper. */}
-      <div className="w-full max-w-xs -rotate-1 drop-shadow-[0_10px_18px_rgb(28_25_23/0.14)]">
-        <div
-          className="bg-[#fffdf8] px-5 pt-5 pb-8 font-mono text-xs/relaxed text-zinc-800 dark:bg-zinc-200"
-          // A torn, zig-zag bottom edge like a till receipt.
-          style={{ mask: RECEIPT_EDGE_MASK, WebkitMask: RECEIPT_EDGE_MASK }}
-          aria-live="polite"
-          aria-label="Brief preview"
-        >
-          <div className="flex justify-between">
-            <span className="font-semibold">PROJECT BRIEF</span>
-            <span>{date}</span>
-          </div>
-          <Dashes />
-          <dl className="space-y-1">
-            {rows.map(([label, value]) => (
-              <div key={label} className="grid grid-cols-[3.5rem_1fr] gap-2">
-                <dt className="text-zinc-500">{label}</dt>
-                <dd className="wrap-break-word">{value}</dd>
-              </div>
-            ))}
-          </dl>
-          <Dashes />
-          <p className="text-zinc-500">NOTES</p>
-          <p className="line-clamp-5 min-h-10 whitespace-pre-wrap">
-            {brief.notes.trim() || "—"}
+    <div className="border-rule bg-paper-2 p-5 max-md:border-t sm:p-6 md:border-l">
+      <div aria-live="polite" aria-label="Brief preview">
+        <div className="flex items-baseline justify-between gap-4 border-b border-rule pb-3 md:pr-10">
+          <p className="font-display text-title tracking-display lowercase">
+            The brief
           </p>
-          <Dashes />
-          <div className="grid grid-cols-[3.5rem_1fr] gap-2">
-            <span className="text-zinc-500">TO</span>
-            <span>Rutwik Shinde, Pune</span>
-            <span className="text-zinc-500">STATUS</span>
-            <span className={cn(isReady && "font-semibold text-orange-700")}>
-              {isReady ? "ready to send ✓" : "filling in…"}
-            </span>
-          </div>
-          <p className="mt-4 text-center font-handwritten text-base text-zinc-500">
-            thank you, come again
-          </p>
+          <p className="text-sm text-muted-foreground tabular-nums">{date}</p>
         </div>
+
+        <dl className="text-[0.9375rem]">
+          {rows.map(([label, value]) => (
+            <div
+              key={label}
+              className="grid grid-cols-[4.5rem_minmax(0,1fr)] gap-x-4 border-b border-rule py-2.5"
+            >
+              <dt className="text-sm text-muted-foreground lowercase">
+                {label}
+              </dt>
+              <dd
+                className={cn(
+                  "wrap-break-word",
+                  label === "Notes" && "line-clamp-5 whitespace-pre-wrap",
+                  !value && "text-muted-foreground"
+                )}
+              >
+                {value || "Not set yet"}
+              </dd>
+            </div>
+          ))}
+          <div className="grid grid-cols-[4.5rem_minmax(0,1fr)] gap-x-4 py-2.5">
+            <dt className="text-sm text-muted-foreground lowercase">To</dt>
+            <dd>Rutwik Shinde, Pune</dd>
+          </div>
+        </dl>
+
+        <p
+          className={cn(
+            "mt-4 text-sm",
+            isReady ? "text-brand-strong" : "text-muted-foreground"
+          )}
+        >
+          {isReady ? "Ready to send." : "Filling in…"}
+        </p>
       </div>
     </div>
-  )
-}
-
-const RECEIPT_EDGE_MASK =
-  "conic-gradient(from -45deg at bottom, #0000, #000 1deg 89deg, #0000 90deg) 50% / 12px 100%"
-
-function Dashes() {
-  return (
-    <div
-      className="my-2.5 h-px bg-[linear-gradient(to_right,currentColor_50%,transparent_0)] bg-size-[6px_1px] text-zinc-400"
-      aria-hidden
-    />
   )
 }

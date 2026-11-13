@@ -24,7 +24,8 @@ export function AgentCursor({
     >
       <svg
         viewBox="0 0 24 24"
-        className="size-6 translate-x-[-3px] translate-y-[-2px] drop-shadow-[0_2px_8px_var(--brand)]"
+        className="size-6 translate-x-[-3px] translate-y-[-2px]"
+        aria-hidden
       >
         <path
           d="M4 2.5 19.5 12l-6.8 1.6L9.6 20 4 2.5Z"
@@ -33,7 +34,7 @@ export function AgentCursor({
           strokeLinejoin="round"
         />
       </svg>
-      <span className="absolute top-5 left-4 rounded-md bg-brand px-1.5 py-0.5 font-mono text-[0.6875rem] font-medium whitespace-nowrap text-brand-foreground shadow-md">
+      <span className="absolute top-5 left-4 rounded-md bg-brand px-1.5 py-0.5 text-xs font-medium whitespace-nowrap text-brand-foreground lowercase">
         agent
       </span>
       {clickId > 0 && (
@@ -54,7 +55,7 @@ export function AgentHighlight({ box }: { box: DOMRect }) {
   return (
     <motion.div
       // Below the chat panel (z-60), so the ring never draws over the chat.
-      className="pointer-events-none fixed top-0 left-0 z-55 rounded-lg shadow-[0_0_24px_-4px_var(--brand)] ring-2 ring-brand"
+      className="pointer-events-none fixed top-0 left-0 z-55 rounded-lg ring-2 ring-brand"
       initial={{
         opacity: 0,
         x: box.left - 4,

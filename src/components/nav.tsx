@@ -19,7 +19,7 @@ export function Nav({
   return (
     <nav
       data-active-id={activeId}
-      className={cn("flex items-center gap-4", className)}
+      className={cn("flex items-center gap-6", className)}
     >
       {items.map(({ title, href }) => {
         const isActive = exactMatch
@@ -50,7 +50,7 @@ export function NavItem({
   return (
     <Link
       className={cn(
-        "text-sm font-medium tracking-wide text-muted-foreground transition-[color] hover:text-foreground aria-[current=page]:text-foreground",
+        "text-[0.9375rem] text-muted-foreground lowercase transition-[color] duration-150 hover:text-foreground aria-[current=page]:text-foreground",
         className
       )}
       {...props}

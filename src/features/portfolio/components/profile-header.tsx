@@ -1,100 +1,64 @@
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger,
-} from "@/components/ui/tooltip"
+import { AgentPrompt } from "@/components/agent/agent-prompt"
 import { USER } from "@/features/portfolio/data/user"
 
-import { FlipSentences } from "./flip-sentences"
-import { HandwrittenArrow, HandwrittenNote } from "./handwritten-note"
-import { HeroTerminal } from "./hero-terminal"
-import { Intro } from "./intro"
-import { PuneStatus } from "./pune-status"
+import { EmailButton } from "./email-button"
+import { HireButton } from "./hire/hire-button"
 
-/** The top of the home page: who I am and what I build, next to the terminal. */
+/**
+ * The first screen. A ledge: a calm field above, the headline resting at the
+ * base with the byline and the two actions under it. On wide screens the
+ * agent sits on the ledge too, in the space the short first line leaves, its
+ * foot level with that line.
+ */
 export function ProfileHeader() {
   return (
-    <section className="grid items-center gap-12 px-4 pt-10 sm:pt-16 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)] lg:pt-24">
-      <div className="min-w-0 space-y-8">
-        <AvailabilityBadge />
+    <section
+      aria-labelledby="hero-title"
+      className="relative page-container flex flex-col gap-10 pt-12 pb-16 [--hero-foot:3rem] [--hero-pb:3.5rem] lg:grid lg:min-h-[calc(100svh-var(--header-height)-var(--banner-height))] lg:grid-cols-12 lg:grid-rows-[1fr_auto_auto_auto] lg:gap-x-(--gap-columns) lg:gap-y-10 lg:pt-12 lg:pb-(--hero-pb) xl:grid-rows-[1fr_auto_auto]"
+    >
+      <div className="hidden lg:col-span-12 lg:block" aria-hidden />
 
-        <div className="flex items-center gap-4">
-          <div className="relative size-18 shrink-0 rounded-full sm:size-20">
-            <img
-              className="block size-full rounded-[inherit] object-cover select-none"
-              src={USER.avatar}
-              alt={`Portrait of ${USER.displayName}`}
-              width={80}
-              height={80}
-            />
-            <div className="pointer-events-none absolute inset-0 rounded-[inherit] inset-ring-1 inset-ring-foreground/15 dark:inset-ring-foreground/10" />
-            <PuneStatus className="absolute -right-0.5 -bottom-0.5" />
-          </div>
-
-          <div className="min-w-0">
-            <div className="flex flex-wrap items-center gap-x-2.5 gap-y-1">
-              <h1 className="text-2xl/none font-medium tracking-tight sm:text-3xl/none">
-                {USER.displayName}
-              </h1>
-
-              <Tooltip>
-                <TooltipTrigger
-                  render={
-                    <span
-                      className="cursor-help rounded-md bg-brand/12 px-1.5 py-0.5 font-mono text-xs font-medium tracking-widest text-brand-strong select-none"
-                      tabIndex={0}
-                    >
-                      PNQ
-                    </span>
-                  }
-                />
-                <TooltipContent>
-                  Pune, India. Yes, that is the airport code.
-                </TooltipContent>
-              </Tooltip>
-            </div>
-
-            <FlipSentences className="mt-2 h-5">
-              {USER.flipSentences}
-            </FlipSentences>
-          </div>
-        </div>
-
-        <Intro />
+      <div className="hero-ledge-panel order-3 lg:order-0 lg:max-xl:col-span-6 lg:max-xl:col-start-7">
+        <AgentPrompt />
       </div>
 
-      <figure className="relative min-w-0">
-        {/* A soft saffron light behind the terminal. */}
-        <div
-          className="pointer-events-none absolute -inset-x-10 -inset-y-12 -z-10 bg-[radial-gradient(closest-side,color-mix(in_oklab,var(--brand)_16%,transparent),transparent)]"
-          aria-hidden
-        />
-        <HeroTerminal className="h-64 sm:h-72" />
+      <h1
+        id="hero-title"
+        className="order-1 font-display text-marquee tracking-display lowercase lg:order-0 lg:col-span-12"
+      >
+        messy ideas in.
+        <br />
+        shipped
+        <br className="sm:hidden" /> products out.
+      </h1>
 
-        <HandwrittenNote
-          className="top-20 left-full ml-4 hidden w-36 flex-col items-start min-[1360px]:flex"
-          aria-hidden
-        >
-          <HandwrittenArrow className="-scale-y-100 -rotate-6" />
-          <span className="ml-3 -rotate-6">
-            it&apos;s a real terminal,
-            <span className="block" />
-            try typing help
+      <div className="order-2 flex flex-col gap-6 lg:order-0 lg:col-span-12 lg:h-(--hero-foot) lg:flex-row lg:items-center lg:justify-between">
+        <p className="flex items-center gap-4 text-lead text-muted-foreground">
+          <img
+            className="size-12 shrink-0 rounded-full object-cover outline-1 -outline-offset-1 outline-foreground/10 select-none"
+            src={USER.avatar}
+            alt=""
+            width={48}
+            height={48}
+          />
+          <span>
+            I’m <span className="text-foreground">{USER.displayName}</span>, a
+            full stack AI developer in Pune.
           </span>
-        </HandwrittenNote>
-      </figure>
-    </section>
-  )
-}
+        </p>
 
-function AvailabilityBadge() {
-  return (
-    <p className="inline-flex items-center gap-2 rounded-full border bg-background/60 py-1 pr-3 pl-2.5 text-sm text-muted-foreground backdrop-blur-sm">
-      <span className="relative flex size-2" aria-hidden>
-        <span className="absolute inline-flex size-full animate-ping rounded-full bg-success opacity-60 motion-reduce:hidden" />
-        <span className="relative inline-flex size-2 rounded-full bg-success" />
-      </span>
-      Available for freelance and full-time work
-    </p>
+        <div className="flex flex-wrap gap-3">
+          <HireButton
+            source="intro"
+            variant="brand"
+            size="pill"
+            className="lowercase"
+          >
+            Hire me
+          </HireButton>
+          <EmailButton variant="outline" size="pill" className="lowercase" />
+        </div>
+      </div>
+    </section>
   )
 }

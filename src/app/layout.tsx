@@ -10,6 +10,7 @@ import { JSON_LD_ID, personJsonLd } from "@/config/json-ld"
 import { META_THEME_COLORS, SITE_INFO } from "@/config/site"
 import { fontVariables } from "@/lib/fonts"
 import { JsonLdScript } from "@/lib/json-ld"
+import { cn } from "@/lib/utils"
 import { KonamiEasterEgg } from "@/components/konami-easter-egg"
 import { Providers } from "@/components/providers"
 import { USER } from "@/features/portfolio/data/user"
@@ -92,7 +93,11 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className={fontVariables} suppressHydrationWarning>
+    <html
+      lang="en"
+      className={cn(fontVariables, "overflow-x-clip")}
+      suppressHydrationWarning
+    >
       <head>
         <script
           type="text/javascript"
@@ -110,7 +115,7 @@ export default function RootLayout({
         <GoogleTagManager gtmId={process.env.NEXT_PUBLIC_GTM_ID} />
       )}
 
-      <body>
+      <body className="overflow-x-clip">
         <Providers>
           <NuqsAdapter>{children}</NuqsAdapter>
           <KonamiEasterEgg />
