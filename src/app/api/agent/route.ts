@@ -3,6 +3,7 @@ import { generateText, Output } from "ai"
 import { z } from "zod"
 
 import { createRateLimiter } from "@/lib/rate-limit"
+import { isSameOrigin } from "@/lib/same-origin"
 import {
   agentOutputSchema,
   toAgentPlan,
@@ -108,14 +109,5 @@ export async function POST(request: Request) {
   } catch (error) {
     console.error("Agent request failed:", error)
     return Response.json({ error: "The agent is busy." }, { status: 502 })
-  }
-}
-
-function isSameOrigin(request: Request) {
-  try {
-    const origin = request.headers.get("origin")
-    return origin !== null && new URL(origin).host === new URL(request.url).host
-  } catch {
-    return false
   }
 }

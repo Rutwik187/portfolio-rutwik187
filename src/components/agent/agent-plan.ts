@@ -246,7 +246,7 @@ function startBrief(): AgentPlan {
       },
     ],
     answer:
-      "He is open to freelance projects, contracts and full-time roles. I opened the project brief: four quick choices and your name, and it is ready to send.",
+      "He is open to freelance projects, contracts and full-time roles. I opened the project brief: your name, your email and a few lines, and it goes straight to his inbox.",
   }
 }
 
