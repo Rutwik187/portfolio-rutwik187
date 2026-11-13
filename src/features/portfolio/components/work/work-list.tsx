@@ -10,12 +10,13 @@ import { cn } from "@/lib/utils"
 import { WORK } from "../../data/work"
 import type { Work } from "../../types/work"
 import { WorkDialog } from "./work-dialog"
+import { WorkStage } from "./work-stage"
 import { workDialogAtom } from "./work-state"
 
 /**
  * The work as an index: one row per product, its facts in columns. On wide
- * screens the row under the pointer or the focus shows its cover in a pane
- * that holds still beside the list.
+ * screens the row under the pointer or the focus shows that product's screens
+ * on a 3D stage that holds still beside the list.
  */
 export function WorkList() {
   const setDialog = useSetAtom(workDialogAtom)
@@ -100,12 +101,8 @@ export function WorkList() {
         className="sticky top-[calc(var(--header-height)+2rem)] hidden self-start lg:col-span-5 lg:block"
         aria-live="polite"
       >
-        <div className="relative aspect-4/3 overflow-hidden rounded-[10px] bg-paper-2 outline-1 -outline-offset-1 outline-rule">
-          {WORK.map((work) => (
-            <Cover key={work.id} work={work} isActive={work.id === active.id} />
-          ))}
-        </div>
-        <figcaption className="mt-5 grid grid-cols-[minmax(0,1fr)_auto] gap-x-6 gap-y-1">
+        <WorkStage activeId={active.id} />
+        <figcaption className="mt-10 grid grid-cols-[minmax(0,1fr)_auto] gap-x-6 gap-y-1">
           <span className="text-[0.9375rem] text-pretty text-ink-2">
             {active.summary}
           </span>
@@ -114,47 +111,6 @@ export function WorkList() {
       </figure>
 
       <WorkDialog />
-    </div>
-  )
-}
-
-/** The project's own screens, in the pane. Phones stand side by side. */
-function Cover({ work, isActive }: { work: Work; isActive: boolean }) {
-  const [first, second] = work.cover.images
-
-  return (
-    <div
-      className={cn(
-        "absolute inset-0 transition-opacity duration-300 ease-out motion-reduce:transition-none",
-        isActive ? "opacity-100" : "opacity-0"
-      )}
-      aria-hidden={!isActive}
-    >
-      {work.cover.device === "desktop" ? (
-        <Image
-          src={first}
-          alt=""
-          sizes="(min-width: 1440px) 540px, 38vw"
-          placeholder="blur"
-          className="absolute top-10 left-10 w-[125%] max-w-none rounded-tl-[6px] outline-1 -outline-offset-1 outline-rule"
-        />
-      ) : (
-        <div className="absolute inset-x-0 top-10 flex justify-center gap-6">
-          {[first, second].filter(Boolean).map((image, index) => (
-            <Image
-              key={index}
-              src={image}
-              alt=""
-              sizes="200px"
-              placeholder="blur"
-              className={cn(
-                "w-[34%] rounded-[18px] outline-1 -outline-offset-1 outline-rule",
-                index === 1 && "translate-y-8"
-              )}
-            />
-          ))}
-        </div>
-      )}
     </div>
   )
 }
