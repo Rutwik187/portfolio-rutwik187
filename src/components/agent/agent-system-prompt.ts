@@ -33,6 +33,7 @@ export function buildAgentSystemPrompt(catalog: AgentCatalog) {
 
 FACTS (the only things you know)
 About: ${USER.about.replace(/\n/g, " ").replace(/\[([^\]]+)\]\([^)]+\)/g, "$1")}
+Track record: building since ${USER.buildingSince}, for ${USER.clientCount} clients across freelance and jobs. The selected work below is a few of them.
 Location: ${USER.address}. Time zone: ${USER.timeZone}.
 Availability: open to freelance projects, contracts and full-time roles.
 Experience:

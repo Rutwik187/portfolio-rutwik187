@@ -26,6 +26,10 @@ export type User = {
     website: string
     experienceId?: string
   }[]
+  /** Year of the first paid build, freelance included */
+  buildingSince: number
+  /** Clients served across freelance and jobs, e.g. "50+" */
+  clientCount: string
   /** Rich about section; supports Markdown */
   about: string
   /** Public URL to avatar image */

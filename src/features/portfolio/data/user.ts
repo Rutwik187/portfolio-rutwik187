@@ -26,8 +26,10 @@ export const USER: User = {
       experienceId: "aiedx",
     },
   ],
+  buildingSince: 2019,
+  clientCount: "50+",
   about: `- Hi, I'm Rutwik, a full stack developer from Pune. I turn messy ideas into products people actually use.
-- Today I build AI agents and LLM apps with [AIEdX](https://aiedx.com) and [BubblSpace](https://bubblspace.com). Before that, I shipped storefronts, booking platforms, dashboards and payment flows for 10+ clients.
+- Today I build AI agents and LLM apps with [AIEdX](https://aiedx.com) and [BubblSpace](https://bubblspace.com). I have been building since 2019, and have shipped storefronts, booking platforms, dashboards and payment flows for 50+ clients.
 - Outside of code: video games, movies, my dog, and a slowly improving guitar.
 `,
   avatar: "https://avatars.githubusercontent.com/u/86617402?v=4",
