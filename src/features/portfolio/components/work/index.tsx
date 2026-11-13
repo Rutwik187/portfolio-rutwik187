@@ -1,3 +1,4 @@
+import { USER } from "../../data/user"
 import { SectionHead } from "../section-head"
 import { WorkList } from "./work-list"
 
@@ -10,7 +11,7 @@ export function Work() {
         id={`${ID}-title`}
         href={`#${ID}`}
         title="Six products for six clients"
-        line="Client products I built and shipped. Open one for screenshots and how it works."
+        line={`Picked from work for ${USER.clientCount} clients since ${USER.buildingSince}. Open one for screenshots and how it works.`}
       />
 
       <WorkList />

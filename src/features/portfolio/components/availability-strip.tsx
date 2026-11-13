@@ -3,28 +3,17 @@ import { ArrowRightIcon } from "lucide-react"
 
 import { cn } from "@/lib/utils"
 
-import { EXPERIENCES } from "../data/experiences"
-import { WORK } from "../data/work"
-
-/** The year of the first role, from the experience data. */
-function getFirstYear() {
-  const years = EXPERIENCES.flatMap((experience) =>
-    experience.positions.map((position) =>
-      Number(position.employmentPeriod.start.split(".").pop())
-    )
-  )
-  return Math.min(...years)
-}
+import { USER } from "../data/user"
 
 /**
  * The page at a glance, under the hero: that Rutwik is open to work, and
- * three facts a visitor would otherwise dig for. Every number comes from the
- * site's data, so it stays true as the data changes.
+ * three facts a visitor would otherwise dig for. The numbers live in the
+ * user data, so the page, the agent and llms.txt all say the same thing.
  */
 export function AvailabilityStrip() {
   const facts = [
-    { label: "Client products shipped", value: String(WORK.length) },
-    { label: "Building since", value: String(getFirstYear()) },
+    { label: "Clients served", value: USER.clientCount },
+    { label: "Building since", value: String(USER.buildingSince) },
     { label: "India, UTC+5:30", value: "Pune" },
   ]
 

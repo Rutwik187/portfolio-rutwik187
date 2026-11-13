@@ -10,7 +10,7 @@ export const EDUCATION: Education[] = [
       end: "2024",
     },
     description: `- Graduated with a CGPA above 9.
-- Built the official websites for [E-Cell RSCOE](https://e-cell-rscoe.vercel.app) and its [E-Summit](https://e-summit.vercel.app).
+- Built the official websites for [E-Cell RSCOE](https://www.ecellrscoe.org) and its [E-Summit](https://e-summit.vercel.app).
 - Took part in hackathons and contributed to open source during Hacktoberfest.`,
     skills: [
       "Data Structures",
