@@ -1,10 +1,9 @@
 /* Hallmark · shape: Marquee Hero (draw d6f95a) · genre: atmospheric · theme: Lumen (deal 1/3, seed freelance-full-stack-developer-4365·41bd5e7a·2026-11-12·r0) · redesign: full · job: hire · modes: light+dark (lumen: night, and the day drop with saffron for indigo)
- * hero: Ledge (/) · nav: banner over a retracting bar · footer: colophon block · imagery: the product (real captures of the six client products) · signature: the live agent in the hero's field, and the Knowledge Hub's RAG pipeline drawn from its own steps
+ * hero: Ledge (/) · nav: banner over a retracting bar · footer: colophon block · imagery: the product (real captures of the six client products) · signature: the live agent and the particle field in the hero, each form one thing Rutwik builds
  * axes: dark/roman-serif/warm · posture: restrained · contrast: pass · fold: pass · hero-review: none run, settled in build · finish-review: subagent · fix · 8 findings · 8 resolved · v2.0.0 */
 /* Hallmark · pre-emit critique: P4 H5 E4 S4 R4 V4 · weakest: S, a type-led hero could front any developer; the agent answering from this portfolio and the hub's real pipeline are what only this page has */
 /* Hallmark · waive 44a · the hero is a Ledge, stamped as hero: Ledge (/) · its head rests at the base of the screen on purpose, under a calm field, and the agent panel sits on that ledge */
 /* Hallmark · waive 82 · the GitHub graph's squares take five colours by daily count · it is a chart of a real year of commits, each mark a value, not a tally */
-/* Hallmark · waive 47c · the blueprint grid sits under the pipeline diagram only · the diagram draws the Knowledge Hub's real ingest and answer steps */
 /* Hallmark · dismissed F18 · the "slots" it measured are shadcn's data-slot attributes on a dialog header and a separator, not Hallmark picture slots */
 /* Hallmark · dismissed 77 · the page has eight sections (hero, work, stack, roles, about, projects, contact, footer); each sits inside an X-ray wrapper, so the count saw two */
 /* Hallmark · answered F20 · the frontend row wraps React to Redux five and one at 1440, a list of tools that keeps its true count */
@@ -235,15 +234,6 @@
   isolation: isolate;
 }
 
-/* A faint 48px grid, only under a diagram of a real system. */
-@utility blueprint {
-  background-image:
-    linear-gradient(var(--blueprint-line) 1px, transparent 1px),
-    linear-gradient(90deg, var(--blueprint-line) 1px, transparent 1px);
-  background-size: 48px 48px;
-  background-position: -1px -1px;
-}
-
 /*
  * The hero's agent panel on wide screens: on the ledge, in the space the
  * head's short first line leaves, five columns wide, its foot level with that
@@ -368,7 +358,6 @@
   --rule-2: oklch(0.8 0.016 290);
   --saffron: oklch(0.774 0.163 60.3);
   --saffron-ink: oklch(0.5 0.13 50);
-  --blueprint-line: oklch(0.19 0.02 290 / 0.06);
 
   --background: var(--paper);
   --foreground: var(--ink);
@@ -471,7 +460,6 @@
   --night-rule-2: oklch(0.36 0.03 292);
   --night-saffron: oklch(0.8 0.15 62);
   --night-saffron-ink: oklch(0.8 0.15 62);
-  --night-blueprint-line: oklch(0.96 0.008 300 / 0.05);
   --night-input: oklch(0.5 0.03 292);
   --night-info: oklch(0.74 0.11 250);
   --night-success: oklch(0.8 0.13 155);
@@ -530,7 +518,6 @@
   --rule-2: var(--night-rule-2);
   --saffron: var(--night-saffron);
   --saffron-ink: var(--night-saffron-ink);
-  --blueprint-line: var(--night-blueprint-line);
 
   --card: var(--paper-2);
   --popover: var(--paper-2);

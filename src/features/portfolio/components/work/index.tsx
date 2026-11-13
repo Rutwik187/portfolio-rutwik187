@@ -1,5 +1,4 @@
 import { SectionHead } from "../section-head"
-import { WorkCase } from "./work-case"
 import { WorkList } from "./work-list"
 
 const ID = "work"
@@ -15,8 +14,6 @@ export function Work() {
       />
 
       <WorkList />
-
-      <WorkCase />
     </section>
   )
 }
