@@ -1,3 +1,26 @@
+/* Hallmark · shape: Marquee Hero (draw d6f95a) · genre: atmospheric · theme: Lumen (deal 1/3, seed freelance-full-stack-developer-4365·41bd5e7a·2026-11-12·r0) · redesign: full · job: hire · modes: light+dark (lumen: night, and the day drop with saffron for indigo)
+ * hero: Ledge (/) · nav: banner over a retracting bar · footer: colophon block · imagery: the product (real captures of the six client products) · signature: the live agent and the particle field in the hero, each form one thing Rutwik builds
+ * axes: dark/roman-serif/warm · posture: restrained · contrast: pass · fold: pass · hero-review: none run, settled in build · finish-review: subagent · fix · 8 findings · 8 resolved · v2.0.0 */
+/* Hallmark · pre-emit critique: P4 H5 E4 S4 R4 V4 · weakest: S, a type-led hero could front any developer; the agent answering from this portfolio and the hub's real pipeline are what only this page has */
+/* Hallmark · waive 44a · the hero is a Ledge, stamped as hero: Ledge (/) · its head rests at the base of the screen on purpose, under a calm field, and the agent panel sits on that ledge */
+/* Hallmark · waive 82 · the GitHub graph's squares take five colours by daily count · it is a chart of a real year of commits, each mark a value, not a tally */
+/* Hallmark · dismissed F18 · the "slots" it measured are shadcn's data-slot attributes on a dialog header and a separator, not Hallmark picture slots */
+/* Hallmark · dismissed 77 · the page has eight sections (hero, work, stack, roles, about, projects, contact, footer); each sits inside an X-ray wrapper, so the count saw two */
+/* Hallmark · answered F20 · the frontend row wraps React to Redux five and one at 1440, a list of tools that keeps its true count */
+/* Hallmark · waive 49b · the head "the tools behind the work" wraps to two lines at 320px only · it is the section's display head, linked to its own anchor, not a nav or footer link */
+/* Hallmark · waive 39b · the 32px chips sit inside the agent panel beside a 48px input · they are app controls for the agent, not marketing actions */
+/* Hallmark · dropped the Kalam handwriting face · the नमस्कार greeting is now the about band's head in the display face, its Devanagari in the system serif */
+/* Hallmark · dropped the hero's flip sentences, the PNQ badge and the presence dot on the avatar · 58 caps the hero at a head, one sentence and its actions; 63 names the decorative dot */
+/* Hallmark · dropped the availability pill with its pulsing dot · the same words now run once, as the linked banner over the nav */
+/* Hallmark · dropped {SOCIAL.linkedin.href}, the hero's GitHub and LinkedIn icons · every profile is linked, with UTM tags, from the contact section's Elsewhere row, and again in the footer */
+/* Hallmark · dropped #clients, the "Shipped for" strip · every client name now sits in the client column of the work index, one click from its project */
+/* Hallmark · dropped onPointerEnter, onPointerLeave, onPointerMove · the handlers drove a cursor-following preview, which craft.md refuses; the cover now holds still in a pane beside the index */
+/* Hallmark · dropped the terminal's drawn title bar (traffic lights, "rutwik@pune: ~", "zsh") and the phone frames' drawn status bar ("9:41") · 47a names drawn OS chrome; the shell and the captures stay */
+/* Hallmark · dropped the brief preview's till-receipt dress (torn edge, rotation, "thank you, come again") · 47c names a physical object faked in CSS; every field of the brief stays */
+/* Hallmark · reworded "I build web apps, mobile apps and AI agents that people actually use." to "messy ideas in. shipped products out." · 58 names the hero; the new head is the about line "I turn messy ideas into products people actually use" */
+/* Hallmark · reworded "Rutwik Shinde" as the h1 to a byline beside the portrait · the head of a Marquee hero is the statement */
+/* Hallmark · reworded "Experience" to "Roles since 2022" and "Stack" to "The tools behind the work" · craft.md § 6: a head says what the visitor will see, never a category label */
+/* Hallmark · reworded "Selected work (6)" to "Six products for six clients", "More projects (9)" to "9 more builds", "Education" to "A CGPA above 9 at RSCOE" and "Let's work together" to "Have a product to build, or a role to fill?" · craft.md § 6 swap test, from facts already on the page */
 @import "tailwindcss";
 @import "shadcn/tailwind.css";
 @import "tw-animate-css";
@@ -56,11 +79,21 @@
   --color-brand: var(--brand);
   --color-brand-strong: var(--brand-strong);
   --color-brand-foreground: var(--brand-foreground);
+  --color-brand-2: var(--brand-2);
 
   --font-sans: var(--font-sans);
   --font-mono: var(--font-mono);
   --font-handwritten: var(--font-handwritten);
-  --font-heading: var(--font-sans);
+  --font-display: var(--font-display);
+  --font-heading: var(--font-display);
+
+  --color-paper: var(--paper);
+  --color-paper-2: var(--paper-2);
+  --color-paper-3: var(--paper-3);
+  --color-ink: var(--ink);
+  --color-ink-2: var(--ink-2);
+  --color-rule: var(--rule);
+  --color-rule-2: var(--rule-2);
 
   --font-mono--font-feature-settings: "ss01", "zero";
 
@@ -111,6 +144,30 @@
     }
   }
 
+  /* A light sweeps left to right across text, for "thinking" states. */
+  --animate-shimmer: shimmer 1.8s linear infinite;
+
+  @keyframes shimmer {
+    from {
+      background-position: 150% 0;
+    }
+    to {
+      background-position: -50% 0;
+    }
+  }
+
+  /* The bar under the hero form on show; the index sets the duration. */
+  --animate-field-progress: field-progress 7s linear forwards;
+
+  @keyframes field-progress {
+    from {
+      transform: scaleX(0);
+    }
+    to {
+      transform: scaleX(1);
+    }
+  }
+
   --animate-spinner-opacity: spinner-opacity
     var(--tw-animation-duration, var(--tw-duration, 1s)) linear infinite;
 
@@ -122,6 +179,29 @@
       opacity: 0.15;
     }
   }
+}
+
+@theme {
+  /* Type roles at 1440: marquee 144, display 84, display-s 60, title 25, lead 21. */
+  --text-marquee: clamp(3.5rem, 9vw + 0.5rem, 9rem);
+  --text-marquee--line-height: 0.92;
+  --text-display: clamp(2.75rem, 5vw + 1rem, 5.25rem);
+  --text-display--line-height: 0.98;
+  --text-display-s: clamp(2.25rem, 4vw + 0.5rem, 3.75rem);
+  --text-display-s--line-height: 1;
+  --text-title: clamp(1.25rem, 0.75vw + 0.875rem, 1.625rem);
+  --text-title--line-height: 1.2;
+  --text-lead: clamp(1.125rem, 0.35vw + 1rem, 1.375rem);
+  --text-lead--line-height: 1.45;
+
+  --tracking-display: -0.015em;
+
+  /* One lifted surface: the floating chat and dialogs, never a glow. */
+  --shadow-card: 0 28px 64px -30px oklch(0.04 0.02 290 / 0.55);
+
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in: cubic-bezier(0.7, 0, 0.84, 0);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
 }
 
 @utility link {
@@ -138,8 +218,83 @@
 }
 
 @utility dot-grid {
-  @apply [--pattern-foreground:var(--color-stone-950)]/6 dark:[--pattern-foreground:var(--color-white)]/5;
+  @apply [--pattern-foreground:var(--color-ink)]/6 dark:[--pattern-foreground:var(--color-ink)]/5;
   @apply bg-[radial-gradient(var(--pattern-foreground)_1px,transparent_0)] bg-size-[8px_8px];
+}
+
+/*
+ * AI surfaces. `ai-ring` is a plain 1px edge one step above the rule, and
+ * `ai-glow` adds nothing: depth comes from lightness, never from a glow.
+ */
+@utility ai-ring {
+  box-shadow: inset 0 0 0 1px var(--rule-2);
+}
+
+@utility ai-glow {
+  isolation: isolate;
+}
+
+/*
+ * The hero's agent panel on wide screens: on the ledge, in the space the
+ * head's short first line leaves, five columns wide, its foot level with that
+ * line. The hero sets --hero-pb (its bottom padding) and --hero-foot (the
+ * byline row).
+ */
+@utility hero-ledge-panel {
+  @media (width >= 80rem) {
+    position: absolute;
+    right: var(--gutter);
+    bottom: calc(
+      var(--hero-pb) + var(--hero-foot) + 2.5rem + 0.92 * var(--text-marquee) +
+        0.5rem
+    );
+    width: calc(
+      (100% - 2 * var(--gutter) - 11 * var(--gap-columns)) / 12 * 5 + 4 *
+        var(--gap-columns)
+    );
+  }
+}
+
+/*
+ * Rises into place as it scrolls into view, tied to the scroll itself.
+ * Browsers without scroll timelines, and readers who ask for less motion,
+ * see it in place from the start.
+ */
+@utility reveal {
+  @supports (animation-timeline: view()) {
+    @media (prefers-reduced-motion: no-preference) {
+      animation: reveal both var(--ease-out);
+      animation-timeline: view();
+      animation-range: entry 0% entry 70%;
+    }
+  }
+}
+
+@keyframes reveal {
+  from {
+    opacity: 0;
+    translate: 0 2.5rem;
+  }
+}
+
+/* The page container: capped at 1440, the gutters grow past it. */
+@utility page-container {
+  width: 100%;
+  max-width: var(--container);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+/*
+ * X-ray mode: a section's source code shows only inside a circle. The
+ * controller sets the radius on <html> and the centre on each overlay.
+ */
+@utility x-ray-mask {
+  mask-image: radial-gradient(
+    circle var(--x-ray-r, 0px) at var(--x-ray-x, 50%) var(--x-ray-y, 50%),
+    #000 calc(100% - 1px),
+    transparent 100%
+  );
 }
 
 @utility step {
@@ -188,98 +343,71 @@
 }
 
 :root {
-  /* warm paper */
-  --background: oklch(0.993 0.002 75);
+  /*
+   * Lumen, day. Bone paper with a cool violet tint, violet-black ink, and
+   * saffron (the flag's #FF9933) as the one signal. Every neutral carries a
+   * little of the 290 hue, so nothing on the page is a stock grey.
+   */
+  --paper: oklch(0.97 0.008 290);
+  --paper-2: oklch(0.945 0.01 290);
+  --paper-3: oklch(0.92 0.012 290);
+  --ink: oklch(0.19 0.02 290);
+  --ink-2: oklch(0.34 0.02 290);
+  --muted-ink: oklch(0.47 0.02 290);
+  --rule: oklch(0.885 0.012 290);
+  --rule-2: oklch(0.8 0.016 290);
+  --saffron: oklch(0.774 0.163 60.3);
+  --saffron-ink: oklch(0.5 0.13 50);
 
-  /* stone-950 */
-  --foreground: oklch(0.147 0.004 49.25);
+  --background: var(--paper);
+  --foreground: var(--ink);
+  --primary: var(--ink);
+  --primary-foreground: var(--paper);
+  --secondary: var(--paper-2);
+  --secondary-foreground: var(--ink);
+  --muted: var(--paper-2);
+  --muted-foreground: var(--muted-ink);
+  --card: oklch(0.985 0.004 290);
+  --card-foreground: var(--ink);
+  --popover: oklch(0.985 0.004 290);
+  --popover-foreground: var(--ink);
+  --accent: var(--paper-2);
+  --accent-muted: color-mix(in oklab, var(--paper-2) 60%, transparent);
+  --accent-foreground: var(--ink);
+  --border: var(--rule);
+  --line: var(--rule);
+  /* Field edges stay at 3:1 against the paper. */
+  --input: oklch(0.62 0.02 290);
+  --ring: oklch(0.58 0.15 55);
+  --info: oklch(0.52 0.12 250);
+  --success: oklch(0.52 0.13 155);
+  --destructive: oklch(0.55 0.19 27);
+  --link: var(--saffron-ink);
 
-  /* stone-950 */
-  --primary: oklch(0.147 0.004 49.25);
+  --brand: var(--saffron);
+  --brand-strong: var(--saffron-ink);
+  --brand-foreground: var(--ink);
+  --brand-2: oklch(0.68 0.15 45);
 
-  /* stone-50 */
-  --primary-foreground: oklch(0.985 0.001 106.423);
-
-  /* stone-100 */
-  --secondary: oklch(0.97 0.001 106.424);
-
-  /* stone-950 */
-  --secondary-foreground: oklch(0.147 0.004 49.25);
-
-  /* stone-100 */
-  --muted: oklch(0.97 0.001 106.424);
-
-  /* stone-500 */
-  --muted-foreground: oklch(0.553 0.013 58.071);
-
-  --card: oklch(0.993 0.002 75);
-
-  /* stone-950 */
-  --card-foreground: oklch(0.147 0.004 49.25);
-
-  --popover: oklch(0.997 0.001 75);
-
-  /* stone-950 */
-  --popover-foreground: oklch(0.147 0.004 49.25);
-
-  /* stone-100 */
-  --accent: oklch(0.97 0.001 106.424);
-
-  --accent-muted: color-mix(in oklab, var(--accent) 50%, transparent);
-
-  /* stone-900 */
-  --accent-foreground: oklch(0.216 0.006 56.043);
-
-  /* stone-200 */
-  --border: oklch(0.923 0.003 48.717);
-
-  /* color-mix */
-  --line: color-mix(in oklab, var(--border) 64%, var(--background));
-
-  /* stone-200 */
-  --input: oklch(0.923 0.003 48.717);
-
-  /* stone-400 */
-  --ring: oklch(0.709 0.01 56.259);
-
-  --info: oklch(0.67 0.17 244.98);
-
-  /* green-600 */
-  --success: oklch(0.627 0.194 149.214);
-
-  /* red-600 */
-  --destructive: oklch(0.577 0.245 27.325);
-
-  /* orange-700 */
-  --link: oklch(0.553 0.195 38.402);
-
-  /* Saffron, the one accent colour. orange-500 for marks, orange-700 for text. */
-  --brand: oklch(0.705 0.213 47.604);
-  --brand-strong: oklch(0.553 0.195 38.402);
-  --brand-foreground: oklch(0.147 0.004 49.25);
-
-  /* stone-50 */
-  --surface: oklch(0.985 0.001 106.423);
-
-  /* stone-950 */
-  --surface-foreground: oklch(0.147 0.004 49.25);
+  --surface: var(--paper-2);
+  --surface-foreground: var(--ink);
 
   --code: var(--background);
   --code-foreground: var(--foreground);
-  --code-number: oklch(0.24 0.01 0 / 0.3);
-  --code-highlight: oklch(0.705 0.213 47.604 / 0.08);
+  --code-number: oklch(0.24 0.012 290 / 0.35);
+  --code-highlight: oklch(0.774 0.163 60.3 / 0.1);
 
-  --selection: oklch(0.705 0.213 47.604 / 0.28);
-  --selection-foreground: var(--foreground);
+  --selection: oklch(0.774 0.163 60.3 / 0.3);
+  --selection-foreground: var(--ink);
 
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.141 0.005 285.823);
-  --sidebar-primary: oklch(0.21 0.006 285.885);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.967 0.001 286.375);
-  --sidebar-accent-foreground: oklch(0.21 0.006 285.885);
-  --sidebar-border: oklch(0.92 0.004 286.32);
-  --sidebar-ring: oklch(0.705 0.015 286.067);
+  --sidebar: var(--paper);
+  --sidebar-foreground: var(--ink);
+  --sidebar-primary: var(--ink);
+  --sidebar-primary-foreground: var(--paper);
+  --sidebar-accent: var(--paper-2);
+  --sidebar-accent-foreground: var(--ink);
+  --sidebar-border: var(--rule);
+  --sidebar-ring: var(--ring);
 
   --expo-out: linear(
     0 0%,
@@ -300,139 +428,121 @@
     1 100%
   );
 
-  --chart-1: oklch(0.32 0 none);
-  --chart-2: oklch(0.41 0 none);
-  --chart-3: oklch(0.54 0 none);
-  --chart-4: oklch(0.71 0 none);
-  --chart-5: oklch(0.89 0 none);
-  --chart-background: oklch(1 0 0);
-  --chart-foreground: oklch(0.141 0.005 285.823);
-  --chart-foreground-muted: oklch(0.552 0.016 285.938);
+  --chart-1: oklch(0.32 0.012 290);
+  --chart-2: oklch(0.41 0.012 290);
+  --chart-3: oklch(0.54 0.012 290);
+  --chart-4: oklch(0.71 0.01 290);
+  --chart-5: oklch(0.89 0.008 290);
+  --chart-background: var(--card);
+  --chart-foreground: var(--ink);
+  --chart-foreground-muted: var(--muted-ink);
   --chart-line-primary: var(--chart-1);
   --chart-line-secondary: var(--chart-2);
-  --chart-crosshair: oklch(0.705 0.015 286.067);
-  --chart-grid: color-mix(in oklab, var(--border) 64%, var(--background));
-  --chart-tooltip-background: oklch(1 0 0);
-  --chart-tooltip-foreground: oklch(0.141 0.005 285.823);
-  --chart-tooltip-muted: oklch(0.552 0.016 285.938);
-  --chart-marker-background: oklch(0.97 0.005 260);
-  --chart-marker-border: oklch(0.85 0.01 260);
-  --chart-marker-foreground: oklch(0.3 0.01 260);
-  --chart-ring-background: oklch(0.9 0.005 260 / 0.25);
-  --chart-label: oklch(0.45 0.01 260);
+  --chart-crosshair: var(--rule-2);
+  --chart-grid: var(--rule);
+  --chart-tooltip-background: var(--card);
+  --chart-tooltip-foreground: var(--ink);
+  --chart-tooltip-muted: var(--muted-ink);
+  --chart-marker-background: var(--paper-2);
+  --chart-marker-border: var(--rule-2);
+  --chart-marker-foreground: var(--ink-2);
+  --chart-ring-background: oklch(0.9 0.01 290 / 0.25);
+  --chart-label: var(--muted-ink);
+
+  /* Lumen, night. The .dark block below points its roles at these. */
+  --night-paper: oklch(0.135 0.022 290);
+  --night-paper-2: oklch(0.165 0.024 290);
+  --night-paper-3: oklch(0.2 0.026 290);
+  --night-ink: oklch(0.96 0.008 300);
+  --night-ink-2: oklch(0.85 0.014 298);
+  --night-muted-ink: oklch(0.7 0.022 295);
+  --night-rule: oklch(0.27 0.026 290);
+  --night-rule-2: oklch(0.36 0.03 292);
+  --night-saffron: oklch(0.8 0.15 62);
+  --night-saffron-ink: oklch(0.8 0.15 62);
+  --night-input: oklch(0.5 0.03 292);
+  --night-info: oklch(0.74 0.11 250);
+  --night-success: oklch(0.8 0.13 155);
+  --night-destructive: oklch(0.7 0.16 27);
+  --night-brand-foreground: oklch(0.15 0.025 290);
+  --night-brand-2: oklch(0.72 0.14 50);
+  --night-code-number: oklch(0.5 0.02 290);
+  --night-code-highlight: oklch(0.8 0.15 62 / 0.08);
+  --night-selection: oklch(0.8 0.15 62 / 0.3);
+  --night-chart-1: oklch(0.96 0.008 300);
+  --night-chart-2: oklch(0.73 0.016 295);
+  --night-chart-3: oklch(0.51 0.02 292);
+  --night-chart-4: oklch(0.39 0.024 290);
+  --night-chart-5: oklch(0.32 0.024 290);
+  --night-chart-ring-background: oklch(0.35 0.02 290 / 0.25);
+
+  /* The highlighter behind a marked phrase in long text. */
+  --highlight: oklch(0.86 0.17 95);
+
+  /* The three faces. next/font loads them; these name the roles. */
+  --font-outlier: "Geist Mono", ui-monospace, monospace;
+
+  /* The page grid: one container, capped and centred. */
+  --container: 1440px;
+  --gutter: 64px;
+  --gap-columns: 32px;
 
   /* Layout */
-  --header-height: --spacing(14);
+  --header-height: --spacing(16);
+  --banner-height: --spacing(9);
   --fade-bottom-height: --spacing(24);
 }
 
+@media (max-width: 60rem) {
+  :root {
+    --gutter: 24px;
+  }
+}
+
+@media (max-width: 40rem) {
+  :root {
+    --gutter: 16px;
+    --gap-columns: 16px;
+  }
+}
+
 .dark {
-  /* stone-950 */
-  --background: oklch(0.147 0.004 49.25);
+  /* Lumen, night: violet-black ground, near-white ink, the same saffron. */
+  --paper: var(--night-paper);
+  --paper-2: var(--night-paper-2);
+  --paper-3: var(--night-paper-3);
+  --ink: var(--night-ink);
+  --ink-2: var(--night-ink-2);
+  --muted-ink: var(--night-muted-ink);
+  --rule: var(--night-rule);
+  --rule-2: var(--night-rule-2);
+  --saffron: var(--night-saffron);
+  --saffron-ink: var(--night-saffron-ink);
 
-  /* stone-50 */
-  --foreground: oklch(0.985 0.001 106.423);
+  --card: var(--paper-2);
+  --popover: var(--paper-2);
+  --secondary: var(--paper-3);
+  --accent: var(--paper-3);
+  --accent-muted: color-mix(in oklab, var(--paper-3) 50%, transparent);
+  --input: var(--night-input);
+  --ring: var(--saffron);
+  --info: var(--night-info);
+  --success: var(--night-success);
+  --destructive: var(--night-destructive);
 
-  /* stone-50 */
-  --primary: oklch(0.985 0.001 106.423);
+  --brand-foreground: var(--night-brand-foreground);
+  --brand-2: var(--night-brand-2);
 
-  /* stone-950 */
-  --primary-foreground: oklch(0.147 0.004 49.25);
+  --code-number: var(--night-code-number);
+  --code-highlight: var(--night-code-highlight);
+  --selection: var(--night-selection);
 
-  /* stone-800 */
-  --secondary: oklch(0.268 0.007 34.298);
-
-  /* stone-50 */
-  --secondary-foreground: oklch(0.985 0.001 106.423);
-
-  /* stone-800 */
-  --muted: oklch(0.268 0.007 34.298);
-
-  /* stone-400 */
-  --muted-foreground: oklch(0.709 0.01 56.259);
-
-  /* stone-900 */
-  --card: oklch(0.216 0.006 56.043);
-
-  /* stone-50 */
-  --card-foreground: oklch(0.985 0.001 106.423);
-
-  /* stone-900 */
-  --popover: oklch(0.216 0.006 56.043);
-
-  /* stone-50 */
-  --popover-foreground: oklch(0.985 0.001 106.423);
-
-  /* stone-800 */
-  --accent: oklch(0.268 0.007 34.298);
-
-  --accent-muted: color-mix(in oklab, var(--accent) 20%, transparent);
-
-  /* stone-50 */
-  --accent-foreground: oklch(0.985 0.001 106.423);
-
-  /* stone-800 */
-  --border: oklch(0.268 0.007 34.298);
-
-  --input: lab(100% 0 0 / 0.15);
-
-  /* stone-500 */
-  --ring: oklch(0.553 0.013 58.071);
-
-  /* green-500 */
-  --success: oklch(0.723 0.219 149.579);
-
-  /* red-700 */
-  --destructive: oklch(0.505 0.213 27.518);
-
-  /* orange-400 */
-  --link: oklch(0.75 0.183 55.934);
-
-  /* orange-400 reads well on the dark background, for marks and text */
-  --brand: oklch(0.75 0.183 55.934);
-  --brand-strong: oklch(0.75 0.183 55.934);
-  --brand-foreground: oklch(0.147 0.004 49.25);
-
-  /* stone-900 */
-  --surface: oklch(0.216 0.006 56.043);
-
-  /* stone-50 */
-  --surface-foreground: oklch(0.985 0.001 106.423);
-
-  --code: var(--background);
-  --code-foreground: var(--foreground);
-  --code-number: oklch(0.43 0 0);
-  --code-highlight: oklch(0.75 0.183 55.934 / 0.08);
-
-  --selection: oklch(0.75 0.183 55.934 / 0.3);
-  --selection-foreground: var(--foreground);
-
-  --sidebar: oklch(0.21 0.006 285.885);
-  --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.274 0.006 286.033);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.552 0.016 285.938);
-
-  --chart-1: oklch(1 0 none);
-  --chart-2: oklch(0.73 0 none);
-  --chart-3: oklch(0.51 0 none);
-  --chart-4: oklch(0.39 0 none);
-  --chart-5: oklch(0.32 0 none);
-  --chart-background: oklch(0.141 0.005 285.823);
-  --chart-foreground: oklch(0.985 0 0);
-  --chart-foreground-muted: oklch(0.705 0.015 286.067);
-  --chart-crosshair: oklch(0.442 0.017 285.786);
-  --chart-tooltip-background: oklch(0.21 0.006 285.885);
-  --chart-tooltip-foreground: oklch(0.985 0 0);
-  --chart-tooltip-muted: oklch(0.705 0.015 286.067);
-  --chart-marker-background: oklch(0.25 0.01 260);
-  --chart-marker-border: oklch(0.4 0.01 260);
-  --chart-marker-foreground: oklch(0.9 0 0);
-  --chart-ring-background: oklch(0.35 0.01 260 / 0.25);
-  --chart-label: oklch(0.75 0.01 260);
+  --chart-1: var(--night-chart-1);
+  --chart-2: var(--night-chart-2);
+  --chart-3: var(--night-chart-3);
+  --chart-4: var(--night-chart-4);
+  --chart-5: var(--night-chart-5);
+  --chart-ring-background: var(--night-chart-ring-background);
 }
 
 @layer base {
@@ -448,10 +558,34 @@
     @apply bg-selection text-selection-foreground;
   }
 
+  html,
+  body {
+    overflow-x: clip;
+  }
+
   body {
     @apply bg-background text-foreground antialiased;
     font-synthesis-weight: none;
     text-rendering: optimizeLegibility;
+    caret-color: var(--brand);
+  }
+
+  /* One ring for everything, drawn at once, never faded in. */
+  :focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
+  }
+
+  h1,
+  h2,
+  h3 {
+    overflow-wrap: break-word;
+    min-width: 0;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
   }
 
   /* Custom scrollbar styling. Thanks @shadcn-ui */
@@ -462,12 +596,12 @@
     background: transparent;
   }
   ::-webkit-scrollbar-thumb {
-    background: var(--border);
+    background: var(--rule-2);
     border-radius: 5px;
   }
   * {
     scrollbar-width: thin;
-    scrollbar-color: var(--border) transparent;
+    scrollbar-color: var(--rule-2) transparent;
   }
 
   [id] {

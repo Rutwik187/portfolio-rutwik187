@@ -14,8 +14,8 @@ export function NotFound() {
           <h1 className="font-mono text-7xl font-medium tracking-tight">
             4<span className="text-brand">0</span>4
           </h1>
-          <p className="font-mono text-sm text-muted-foreground">
-            zsh: no such file or directory
+          <p className="text-sm text-muted-foreground">
+            <samp className="font-mono">zsh: no such file or directory</samp>
           </p>
         </div>
 

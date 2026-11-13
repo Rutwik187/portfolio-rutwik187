@@ -15,6 +15,9 @@ const eventSchema = z.object({
     "send_hire_brief",
     "copy_hire_brief",
     "open_work",
+    "toggle_x_ray",
+    "ask_agent",
+    "open_agent_chat",
   ]),
   // declare type AllowedPropertyValues = string | number | boolean | null
   properties: z

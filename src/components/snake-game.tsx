@@ -363,12 +363,18 @@ export function SnakeGame({ className }: { className?: string }) {
 
   return (
     <div className={cn("flex flex-col gap-4", className)}>
-      <div className="flex items-center justify-between gap-4 px-4 font-mono text-sm">
+      <div className="flex items-center justify-between gap-4 px-4 text-sm">
         <p>
-          score <span className="text-brand-strong tabular-nums">{score}</span>
+          Score{" "}
+          <span className="font-mono text-brand-strong tabular-nums">
+            {score}
+          </span>
         </p>
         <p className="text-muted-foreground">
-          best <span className="text-foreground tabular-nums">{bestScore}</span>
+          Best{" "}
+          <span className="font-mono text-foreground tabular-nums">
+            {bestScore}
+          </span>
         </p>
       </div>
 
@@ -389,7 +395,7 @@ export function SnakeGame({ className }: { className?: string }) {
         />
 
         {status !== "running" && (
-          <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 rounded-lg bg-background/70 backdrop-blur-[2px]">
+          <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 rounded-lg bg-background/70">
             {status === "over" && (
               <p className="font-mono text-2xl font-medium">game over</p>
             )}

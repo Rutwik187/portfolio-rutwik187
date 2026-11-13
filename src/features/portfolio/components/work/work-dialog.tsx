@@ -54,7 +54,7 @@ export function WorkDialog() {
             <Button
               variant="outline"
               size="icon-sm"
-              className="absolute top-3 right-3 rounded-full bg-background/80 shadow-sm backdrop-blur-sm"
+              className="absolute top-3 right-3 rounded-full bg-background"
             />
           }
         >
@@ -85,7 +85,7 @@ function WorkDetails({ work }: { work: Work }) {
     >
       <figure>
         <div
-          className="relative flex h-(--stage-height) touch-pan-y items-center justify-center overflow-hidden bg-muted/60 dot-grid px-12 py-6 [--stage-height:min(54dvh,30rem)] sm:px-16"
+          className="relative flex h-(--stage-height) touch-pan-y items-center justify-center overflow-hidden bg-paper-2 px-12 py-6 [--stage-height:min(54dvh,30rem)] sm:px-16"
           onPointerDown={(event) => {
             if (event.pointerType !== "mouse")
               swipeStartX.current = event.clientX
@@ -118,7 +118,7 @@ function WorkDetails({ work }: { work: Work }) {
           <Button
             variant="outline"
             size="icon-sm"
-            className="absolute top-1/2 left-2 -translate-y-1/2 rounded-full bg-background/80 backdrop-blur-sm sm:left-4"
+            className="absolute top-1/2 left-2 -translate-y-1/2 rounded-full bg-background sm:left-4"
             onClick={() => go(-1)}
             aria-label="Previous screenshot"
           >
@@ -127,20 +127,20 @@ function WorkDetails({ work }: { work: Work }) {
           <Button
             variant="outline"
             size="icon-sm"
-            className="absolute top-1/2 right-2 -translate-y-1/2 rounded-full bg-background/80 backdrop-blur-sm sm:right-4"
+            className="absolute top-1/2 right-2 -translate-y-1/2 rounded-full bg-background sm:right-4"
             onClick={() => go(1)}
             aria-label="Next screenshot"
           >
             <ArrowRightIcon />
           </Button>
 
-          <span className="absolute bottom-3 left-4 rounded-full bg-background/80 px-2 py-0.5 font-mono text-xs text-muted-foreground tabular-nums backdrop-blur-sm">
+          <span className="absolute bottom-3 left-4 rounded-full bg-background px-2.5 py-0.5 text-xs text-muted-foreground tabular-nums">
             {pad(index + 1)} / {pad(count)}
           </span>
         </div>
 
         <figcaption
-          className="flex min-h-11 items-center border-y border-line px-5 py-2.5 text-sm text-pretty text-muted-foreground sm:px-6"
+          className="flex min-h-11 items-center border-y border-rule px-5 py-2.5 text-sm text-pretty text-muted-foreground sm:px-6"
           aria-live="polite"
         >
           {shot.caption}
@@ -148,7 +148,7 @@ function WorkDetails({ work }: { work: Work }) {
       </figure>
 
       <ul
-        className="no-scrollbar flex gap-2 overflow-x-auto border-b border-line px-5 py-3 sm:px-6"
+        className="no-scrollbar flex gap-2 overflow-x-auto border-b border-rule px-5 py-3 sm:px-6"
         aria-label="Screenshots"
       >
         {work.shots.map((item, itemIndex) => (
@@ -159,7 +159,7 @@ function WorkDetails({ work }: { work: Work }) {
               aria-label={`Screenshot ${itemIndex + 1}: ${item.alt}`}
               aria-current={itemIndex === index}
               className={cn(
-                "relative block h-12 overflow-hidden rounded-md ring-1 ring-border transition",
+                "relative block h-12 overflow-hidden rounded-md ring-1 ring-rule transition-[opacity,box-shadow] duration-150",
                 item.device === "desktop" ? "aspect-16/10" : "aspect-9/19",
                 itemIndex === index
                   ? "ring-2 ring-brand"
@@ -180,10 +180,10 @@ function WorkDetails({ work }: { work: Work }) {
       <div className="grid gap-8 p-5 sm:grid-cols-[minmax(0,1fr)_14rem] sm:gap-10 sm:p-6">
         <div className="space-y-5">
           <div className="space-y-1.5">
-            <p className="font-mono text-xs text-muted-foreground">
-              {work.client} · {work.year}
+            <p className="text-sm text-muted-foreground">
+              {work.client}, {work.year}
             </p>
-            <DialogTitle className="text-2xl/tight font-semibold tracking-tight">
+            <DialogTitle className="font-display text-display-s tracking-display lowercase">
               {work.title}
             </DialogTitle>
           </div>
@@ -208,14 +208,15 @@ function WorkDetails({ work }: { work: Work }) {
           </ul>
         </div>
 
-        <aside className="space-y-6 sm:border-l sm:border-dashed sm:border-line sm:pl-6">
+        <aside className="space-y-6 sm:border-l sm:border-rule sm:pl-6">
           {work.links.length > 0 && (
             <div className="flex flex-wrap gap-2 sm:flex-col">
               {work.links.map((link, linkIndex) => (
                 <Button
                   key={link.href}
-                  variant={linkIndex === 0 ? "default" : "outline"}
-                  className="sm:justify-between"
+                  variant={linkIndex === 0 ? "brand" : "outline"}
+                  size="pill"
+                  className="lowercase sm:justify-between"
                   nativeButton={false}
                   render={
                     <a
@@ -235,14 +236,14 @@ function WorkDetails({ work }: { work: Work }) {
           <dl className="space-y-5 text-sm">
             {work.role && (
               <div>
-                <dt className="font-mono text-xs text-muted-foreground">
+                <dt className="text-sm text-muted-foreground lowercase">
                   Role
                 </dt>
                 <dd className="mt-1">{work.role}</dd>
               </div>
             )}
             <div>
-              <dt className="font-mono text-xs text-muted-foreground">Stack</dt>
+              <dt className="text-sm text-muted-foreground lowercase">Stack</dt>
               <dd className="mt-2">
                 <ul className="flex flex-wrap gap-1.5">
                   {work.stack.map((item) => (
@@ -268,16 +269,19 @@ function Process({ process }: { process: NonNullable<Work["process"]> }) {
   return (
     <section
       aria-labelledby={titleId}
-      className="space-y-5 border-t border-line pt-6 sm:col-span-2"
+      className="space-y-6 border-t border-rule pt-8 sm:col-span-2"
     >
-      <h3 id={titleId} className="font-medium">
+      <h3
+        id={titleId}
+        className="font-display text-title tracking-display lowercase"
+      >
         {process.title}
       </h3>
 
       <div className="grid gap-8 sm:grid-cols-2">
         {process.lanes.map((lane) => (
           <div key={lane.title}>
-            <p className="font-mono text-xs tracking-widest text-muted-foreground uppercase">
+            <p className="text-sm text-muted-foreground lowercase">
               {lane.title}
             </p>
             <ol className="mt-4">
@@ -292,7 +296,7 @@ function Process({ process }: { process: NonNullable<Work["process"]> }) {
                       aria-hidden
                     />
                   )}
-                  <span className="flex size-6 items-center justify-center rounded-full border border-border bg-background font-mono text-[0.6875rem] text-muted-foreground tabular-nums">
+                  <span className="flex size-6 items-center justify-center rounded-full border border-rule-2 bg-background text-xs text-muted-foreground tabular-nums">
                     {stepIndex + 1}
                   </span>
                   <div className="pt-0.5">

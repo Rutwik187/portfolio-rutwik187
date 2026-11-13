@@ -1,81 +1,79 @@
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger,
-} from "@/components/ui/tooltip"
+import { AgentPrompt } from "@/components/agent/agent-prompt"
 import { USER } from "@/features/portfolio/data/user"
 
-import { FlipSentences } from "./flip-sentences"
-import { HandwrittenArrow, HandwrittenNote } from "./handwritten-note"
-import { HeroTerminal } from "./hero-terminal"
-import { Intro } from "./intro"
-import { PuneStatus } from "./pune-status"
+import { EmailButton } from "./email-button"
+import { HeroFieldCanvas } from "./hero-field/hero-field-canvas"
+import { HeroFieldIndex } from "./hero-field/hero-field-index"
+import { HireButton } from "./hire/hire-button"
 
-/** The top of the home page: who I am and what I build, next to the terminal. */
+/**
+ * The first screen. A ledge: a live field above, the headline resting at the
+ * base with the byline and the two actions under it. In the field, a cloud
+ * of particles keeps coming together as a web app, a mobile app and an AI
+ * agent, which is the headline acted out. On wide screens the agent sits on
+ * the ledge too, in the space the short first line leaves.
+ */
 export function ProfileHeader() {
   return (
-    <section className="grid items-center gap-10 px-4 pt-10 sm:pt-16 lg:grid-cols-2 lg:gap-12 lg:pt-20">
-      <div className="min-w-0 space-y-8">
-        <div className="flex items-center gap-4">
-          <div className="relative size-18 shrink-0 rounded-full sm:size-20">
-            <img
-              className="block size-full rounded-[inherit] object-cover select-none"
-              src={USER.avatar}
-              alt={`Portrait of ${USER.displayName}`}
-              width={80}
-              height={80}
-            />
-            <div className="pointer-events-none absolute inset-0 rounded-[inherit] inset-ring-1 inset-ring-foreground/15 dark:inset-ring-foreground/10" />
-            <PuneStatus className="absolute -right-0.5 -bottom-0.5" />
-          </div>
+    <section
+      aria-labelledby="hero-title"
+      className="relative isolate page-container flex flex-col gap-10 pt-6 pb-16 [--hero-foot:3rem] [--hero-pb:3.5rem] lg:grid lg:min-h-[calc(100svh-var(--header-height)-var(--banner-height))] lg:grid-cols-12 lg:grid-rows-[1fr_auto_auto_auto] lg:gap-x-(--gap-columns) lg:gap-y-10 lg:pt-10 lg:pb-(--hero-pb) xl:grid-rows-[1fr_auto_auto]"
+    >
+      <HeroFieldCanvas className="absolute inset-y-0 left-1/2 -z-10 w-screen -translate-x-1/2 mask-b-from-70% mask-b-to-100%" />
 
-          <div className="min-w-0">
-            <div className="flex flex-wrap items-center gap-x-2.5 gap-y-1">
-              <h1 className="text-2xl/none font-medium tracking-tight sm:text-3xl/none">
-                {USER.displayName}
-              </h1>
-
-              <Tooltip>
-                <TooltipTrigger
-                  render={
-                    <span
-                      className="cursor-help rounded-md bg-brand/12 px-1.5 py-0.5 font-mono text-xs font-medium tracking-widest text-brand-strong select-none"
-                      tabIndex={0}
-                    >
-                      PNQ
-                    </span>
-                  }
-                />
-                <TooltipContent>
-                  Pune, India. Yes, that is the airport code.
-                </TooltipContent>
-              </Tooltip>
-            </div>
-
-            <FlipSentences className="mt-2 h-5">
-              {USER.flipSentences}
-            </FlipSentences>
-          </div>
-        </div>
-
-        <Intro />
+      <div className="relative order-0 h-[min(84vw,22rem)] lg:col-span-12 lg:h-auto lg:min-h-64">
+        <div
+          data-hero-field-anchor
+          className="absolute inset-x-0 top-0 bottom-10 lg:inset-y-0 lg:right-0 lg:left-auto lg:w-1/2 xl:w-5/12"
+          aria-hidden
+        />
+        <HeroFieldIndex className="absolute bottom-0 left-0 lg:top-0 lg:bottom-auto" />
       </div>
 
-      <figure className="relative min-w-0">
-        <HeroTerminal className="h-64 sm:h-72" />
+      <div
+        data-hero-field-floor
+        className="hero-ledge-panel order-3 lg:order-0 lg:max-xl:col-span-6 lg:max-xl:col-start-7"
+      >
+        <AgentPrompt />
+      </div>
 
-        <HandwrittenNote
-          className="top-20 left-full ml-4 hidden w-36 flex-col items-start min-[1360px]:flex"
-          aria-hidden
-        >
-          <HandwrittenArrow className="-scale-y-100 -rotate-6" />
-          <span className="ml-3 -rotate-6">
-            it&apos;s a real terminal,
-            <span className="block" />
-            try typing help
+      <h1
+        id="hero-title"
+        className="order-1 font-display text-marquee tracking-display lowercase lg:order-0 lg:col-span-12"
+      >
+        messy ideas in.
+        <br />
+        shipped
+        <br className="sm:hidden" /> products out.
+      </h1>
+
+      <div className="order-2 flex flex-col gap-6 lg:order-0 lg:col-span-12 lg:h-(--hero-foot) lg:flex-row lg:items-center lg:justify-between">
+        <p className="flex items-center gap-4 text-lead text-muted-foreground">
+          <img
+            className="size-12 shrink-0 rounded-full object-cover outline-1 -outline-offset-1 outline-foreground/10 select-none"
+            src={USER.avatar}
+            alt=""
+            width={48}
+            height={48}
+          />
+          <span>
+            I’m <span className="text-foreground">{USER.displayName}</span>, a
+            full stack AI developer in Pune.
           </span>
-        </HandwrittenNote>
-      </figure>
+        </p>
+
+        <div className="flex flex-wrap gap-3">
+          <HireButton
+            source="intro"
+            variant="brand"
+            size="pill"
+            className="lowercase"
+          >
+            Hire me
+          </HireButton>
+          <EmailButton variant="outline" size="pill" className="lowercase" />
+        </div>
+      </div>
     </section>
   )
 }

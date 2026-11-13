@@ -8,6 +8,7 @@ import { GitHubIcon } from "@/components/icons"
 import { NavDesktop } from "@/components/nav-desktop"
 import { RutwikLogo } from "@/components/rutwik-mark"
 import { ThemeToggle } from "@/components/theme-toggle"
+import { XRayToggle } from "@/components/x-ray/x-ray-toggle"
 import { HireButton } from "@/features/portfolio/components/hire/hire-button"
 
 import { ScrollProgress } from "./scroll-progress"
@@ -16,57 +17,65 @@ const CommandMenu = dynamic(() => import("@/components/command-menu"))
 
 export function SiteHeader() {
   return (
-    <header className="sticky top-0 z-50 max-w-screen overflow-x-clip border-b border-line bg-background/85 px-2 backdrop-blur-md">
-      <div className="mx-auto flex h-(--header-height) items-center gap-2 pr-2 pl-4 sm:gap-4 md:max-w-3xl lg:max-w-5xl">
-        <Link href="/" aria-label="Home" className="shrink-0">
-          <RutwikLogo />
+    <>
+      {/* One linked announcement over the bar. It scrolls away; the bar stays. */}
+      <p className="flex h-(--banner-height) items-center justify-center border-b border-rule bg-paper-2 px-4 text-sm text-muted-foreground">
+        <Link
+          href="/#contact"
+          className="underline-offset-4 transition-colors duration-150 hover:text-foreground hover:underline"
+        >
+          Open to freelance
+          <span className="max-sm:hidden"> projects, contracts</span> and
+          full-time work
         </Link>
+      </p>
 
-        <div className="flex-1" />
+      <header className="sticky top-0 z-50 border-b border-rule bg-background">
+        <div className="page-container flex h-(--header-height) items-center gap-2 sm:gap-6">
+          <Link href="/" aria-label="Home" className="shrink-0">
+            <RutwikLogo />
+          </Link>
 
-        <NavDesktop items={MAIN_NAV} />
+          <div className="flex-1" />
 
-        <div className="flex items-center max-sm:*:data-[slot=command-menu-trigger]:hidden">
-          <Separator
-            orientation="vertical"
-            className="mr-2 max-sm:hidden data-vertical:h-5 data-vertical:self-center"
-          />
-          <CommandMenu enabledHotkeys />
-          <Separator
-            orientation="vertical"
-            className="mx-2 max-sm:hidden data-vertical:h-5 data-vertical:self-center"
-          />
-          <Button
-            variant="ghost"
-            size="icon-sm"
-            className="max-sm:hidden"
-            nativeButton={false}
-            render={
-              <a
-                href={`https://github.com/${GITHUB_USERNAME}`}
-                target="_blank"
-                rel="noopener"
-                aria-label="GitHub profile"
-              >
-                <GitHubIcon />
-              </a>
-            }
-          />
-          <Separator
-            orientation="vertical"
-            className="mx-2 max-sm:hidden data-vertical:h-5 data-vertical:self-center"
-          />
-          <ThemeToggle />
-          <HireButton
-            source="header"
-            size="sm"
-            className="ml-2 bg-brand text-brand-foreground hover:bg-brand/85"
-          >
-            Hire me
-          </HireButton>
+          <NavDesktop items={MAIN_NAV} />
+
+          <div className="flex items-center gap-1 max-sm:*:data-[slot=command-menu-trigger]:hidden">
+            <Separator
+              orientation="vertical"
+              className="mr-2 max-sm:hidden data-vertical:h-5 data-vertical:self-center"
+            />
+            <CommandMenu enabledHotkeys />
+            <Button
+              variant="ghost"
+              size="icon-sm"
+              className="max-sm:hidden"
+              nativeButton={false}
+              render={
+                <a
+                  href={`https://github.com/${GITHUB_USERNAME}`}
+                  target="_blank"
+                  rel="noopener"
+                  aria-label="GitHub profile"
+                >
+                  <GitHubIcon />
+                </a>
+              }
+            />
+            <XRayToggle />
+            <ThemeToggle />
+            <HireButton
+              source="header"
+              size="sm"
+              variant="brand"
+              className="ml-2 h-9 rounded-full px-4 lowercase"
+            >
+              Hire me
+            </HireButton>
+          </div>
         </div>
-      </div>
-      <ScrollProgress />
-    </header>
+        <ScrollProgress />
+      </header>
+    </>
   )
 }

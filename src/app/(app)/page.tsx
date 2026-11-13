@@ -4,14 +4,14 @@ import type { ProfilePage, WithContext } from "schema-dts"
 import { JSON_LD_ID } from "@/config/json-ld"
 import { JsonLdScript } from "@/lib/json-ld"
 import { absoluteUrl } from "@/lib/utils"
+import { getAgentCatalog } from "@/components/agent/agent-catalog"
+import { AgentChat } from "@/components/agent/agent-chat"
+import { XRayController } from "@/components/x-ray/x-ray-controller"
+import { XRaySection } from "@/components/x-ray/x-ray-section"
 import { Contact } from "@/features/portfolio/components/contact"
-import { Education } from "@/features/portfolio/components/education"
 import { Experiences } from "@/features/portfolio/components/experiences"
-import { GitHubContributions } from "@/features/portfolio/components/github-contributions"
 import { Hello } from "@/features/portfolio/components/hello"
-import { Overview } from "@/features/portfolio/components/overview"
 import { ProfileHeader } from "@/features/portfolio/components/profile-header"
-import { Projects } from "@/features/portfolio/components/projects"
 import { TechStack } from "@/features/portfolio/components/tech-stack"
 import { Work } from "@/features/portfolio/components/work"
 import { USER } from "@/features/portfolio/data/user"
@@ -26,34 +26,38 @@ export default function HomePage() {
   return (
     <>
       <JsonLdScript data={getProfilePageJsonLd()} />
+      <XRayController />
+      <AgentChat catalog={getAgentCatalog()} />
 
-      <div className="**:data-[slot=panel]:scroll-mt-[calc(var(--header-height)+(--spacing(8)))]">
-        <div className="mx-auto md:max-w-3xl lg:max-w-5xl">
+      <div className="relative isolate">
+        <XRaySection id="hero">
           <ProfileHeader />
-          <Overview />
-          <SectionGap />
+        </XRaySection>
 
+        <SectionGap size="s" />
+        <XRaySection id="work">
           <Work />
-          <SectionGap />
+        </XRaySection>
 
-          <Hello />
-          <GitHubContributions />
-          <SectionGap />
-
-          <Experiences />
-          <SectionGap />
-
+        <SectionGap size="l" />
+        <XRaySection id="stack">
           <TechStack />
-          <SectionGap />
+        </XRaySection>
 
-          <Projects />
-          <SectionGap />
+        <SectionGap size="m" />
+        <XRaySection id="experience">
+          <Experiences />
+        </XRaySection>
 
-          <Education />
-          <SectionGap />
+        <SectionGap size="m" />
+        <XRaySection id="about">
+          <Hello />
+        </XRaySection>
 
+        <SectionGap size="l" />
+        <XRaySection id="contact">
           <Contact />
-        </div>
+        </XRaySection>
       </div>
     </>
   )
@@ -72,7 +76,21 @@ function getProfilePageJsonLd(): WithContext<ProfilePage> {
   }
 }
 
-/** Space between sections. Whitespace, not a line, keeps the page calm. */
-function SectionGap() {
-  return <div className="h-16 sm:h-24" aria-hidden />
+/**
+ * Space between sections, in three steps (120, 144 and 176px at desktop
+ * sizes), mixed so the seams do not all read the same.
+ */
+function SectionGap({ size }: { size: "s" | "m" | "l" }) {
+  return (
+    <div
+      className={
+        size === "s"
+          ? "h-16 lg:h-30"
+          : size === "m"
+            ? "h-20 lg:h-36"
+            : "h-24 lg:h-44"
+      }
+      aria-hidden
+    />
+  )
 }

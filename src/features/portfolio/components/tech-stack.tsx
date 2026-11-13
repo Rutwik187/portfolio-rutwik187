@@ -1,74 +1,74 @@
 import { TECH_STACK } from "../data/tech-stack"
 import type { TechStack as TechStackType } from "../types/tech-stack"
-import { Panel, PanelHeader, PanelTitle } from "./panel"
-import { PanelTitleCopy } from "./panel-title-copy"
 
 const ID = "stack"
 
 export function TechStack() {
   return (
-    <Panel id={ID}>
-      <PanelHeader>
-        <PanelTitle>
-          <a href={`#${ID}`}>Stack</a>
-          <PanelTitleCopy id={ID} />
-        </PanelTitle>
-      </PanelHeader>
+    <section
+      id={ID}
+      aria-labelledby={`${ID}-title`}
+      className="page-container grid gap-y-10 lg:grid-cols-12 lg:gap-x-(--gap-columns)"
+    >
+      <h2
+        id={`${ID}-title`}
+        className="font-display text-display-s tracking-display lowercase lg:sticky lg:top-[calc(var(--header-height)+3rem)] lg:col-span-4 lg:self-start"
+      >
+        <a
+          href={`#${ID}`}
+          className="underline-offset-[0.12em] hover:underline"
+        >
+          The tools behind the work
+        </a>
+      </h2>
 
-      <div className="[--badge-height:--spacing(6)] [--col-left-width:--spacing(36)] lg:[--col-left-width:--spacing(28)]">
-        <div className="pt-2 lg:grid lg:grid-cols-2 lg:gap-x-12">
-          {Object.entries(groupByCategory(TECH_STACK)).map(
-            ([category, items], index) => {
-              const categoryId = `${ID}-${category
-                .toLowerCase()
-                .replace(/[^a-z0-9]+/g, "-")
-                .replace(/(^-|-$)/g, "")}`
+      <dl className="lg:col-span-8">
+        {Object.entries(groupByCategory(TECH_STACK)).map(
+          ([category, items]) => {
+            const categoryId = `${ID}-${category
+              .toLowerCase()
+              .replace(/[^a-z0-9]+/g, "-")
+              .replace(/(^-|-$)/g, "")}`
 
-              return (
-                <div
-                  key={category}
-                  className="grid items-start gap-y-2 py-3 sm:grid-cols-[var(--col-left-width)_1fr]"
+            return (
+              <div
+                key={category}
+                className="grid gap-y-3 border-t border-rule py-5 first:border-t-0 first:pt-0 sm:grid-cols-[10rem_minmax(0,1fr)] sm:gap-x-8"
+              >
+                <dt
+                  id={categoryId}
+                  className="font-display text-title tracking-display lowercase"
                 >
-                  <div
-                    id={categoryId}
-                    className="pl-4 text-sm/(--badge-height)"
-                  >
-                    <span
-                      className="mr-1.5 font-mono text-muted-foreground/80 select-none"
-                      aria-hidden
-                    >
-                      {(index + 1).toString().padStart(2, "0")}
-                    </span>
-                    {category}
-                  </div>
+                  {category}
+                </dt>
 
+                <dd>
                   <ul
                     aria-labelledby={categoryId}
-                    className="flex flex-wrap gap-1.5 px-4"
+                    className="flex flex-wrap gap-2"
                   >
-                    {items.map((item) => {
-                      return (
-                        <li key={item.key} className="flex">
-                          <a
-                            href={item.href}
-                            target="_blank"
-                            rel="noopener"
-                            className="flex h-(--badge-height) items-center justify-center gap-1.25 rounded-full bg-stone-50/80 px-2 font-mono font-features-['ss01','ss03','zero'] text-xs text-foreground inset-ring-1 inset-ring-border dark:bg-stone-900/80 [&_svg]:pointer-events-none [&_svg]:size-3.5 [&_svg]:shrink-0 [&_svg]:text-muted-foreground/80"
-                          >
-                            {item.icon}
-                            {item.title}
-                          </a>
-                        </li>
-                      )
-                    })}
+                    {items.map((item) => (
+                      <li key={item.key} className="flex">
+                        <a
+                          data-agent={`tech-${item.key}`}
+                          href={item.href}
+                          target="_blank"
+                          rel="noopener"
+                          className="flex h-8 items-center gap-1.5 rounded-full border border-rule-2 px-3 text-sm text-ink-2 transition-colors duration-150 hover:bg-paper-2 hover:text-foreground [&_svg]:pointer-events-none [&_svg]:size-3.5 [&_svg]:shrink-0 [&_svg]:text-muted-foreground"
+                        >
+                          {item.icon}
+                          {item.title}
+                        </a>
+                      </li>
+                    ))}
                   </ul>
-                </div>
-              )
-            }
-          )}
-        </div>
-      </div>
-    </Panel>
+                </dd>
+              </div>
+            )
+          }
+        )}
+      </dl>
+    </section>
   )
 }
 

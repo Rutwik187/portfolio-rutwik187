@@ -10,6 +10,8 @@ import { useTheme } from "next-themes"
 import { fireConfetti } from "@/lib/confetti"
 import { trackEvent } from "@/lib/events"
 import { cn } from "@/lib/utils"
+import { askAgentAtom } from "@/components/agent/agent-state"
+import { useXRayToggle } from "@/components/x-ray/x-ray-controller"
 import { hireDialogOpenAtom } from "@/features/portfolio/components/hire/hire-state"
 import { workDialogAtom } from "@/features/portfolio/components/work/work-state"
 import { EXPERIENCES } from "@/features/portfolio/data/experiences"
@@ -33,6 +35,8 @@ type CommandContext = {
   navigate: (href: "/play") => void
   openHire: () => void
   openWork: (id: string) => void
+  toggleXRay: () => void
+  askAgent: (question: string) => void
 }
 
 type Command = {
@@ -62,11 +66,11 @@ const CHAI_LINES = [
 const PROMPT = "rutwik@pune:~$"
 
 function Accent({ children }: { children: React.ReactNode }) {
-  return <span className="text-orange-400">{children}</span>
+  return <span className="text-brand-strong">{children}</span>
 }
 
 function Muted({ children }: { children: React.ReactNode }) {
-  return <span className="text-stone-400">{children}</span>
+  return <span className="text-muted-foreground">{children}</span>
 }
 
 function ExternalLink({
@@ -81,7 +85,7 @@ function ExternalLink({
       href={href}
       target="_blank"
       rel="noopener"
-      className="underline decoration-stone-500 underline-offset-2 hover:text-orange-300 hover:decoration-orange-300"
+      className="underline decoration-rule-2 underline-offset-2 hover:text-brand-strong hover:decoration-brand"
     >
       {children}
     </a>
@@ -126,7 +130,7 @@ const COMMANDS: Record<string, Command> = {
               <Muted>{command.description}</Muted>
             </div>
           ))}
-        <span className="col-span-2 mt-1 text-stone-500">
+        <span className="col-span-2 mt-1 text-muted-foreground">
           There are a few hidden ones too. Good luck.
         </span>
       </div>
@@ -183,7 +187,7 @@ const COMMANDS: Record<string, Command> = {
             <button
               type="button"
               onClick={() => openWork(item.id)}
-              className="underline decoration-stone-500 underline-offset-2 hover:text-orange-300 hover:decoration-orange-300"
+              className="underline decoration-rule-2 underline-offset-2 hover:text-brand-strong hover:decoration-brand"
             >
               {item.title}
             </button>{" "}
@@ -220,7 +224,7 @@ const COMMANDS: Record<string, Command> = {
           return (
             <div key={experience.id}>
               <Muted>
-                {start}–{end ?? "now"}
+                {start} to {end ?? "now"}
               </Muted>{" "}
               {position.title} <Accent>@</Accent> {experience.companyName}
             </div>
@@ -310,6 +314,32 @@ const COMMANDS: Record<string, Command> = {
       return <Muted>Switched to {next} mode.</Muted>
     },
   },
+  ask: {
+    description: "ask the agent, e.g. ask show me his AI work",
+    run: ({ args, askAgent }) => {
+      if (args.length === 0) {
+        return (
+          <Muted>
+            Try <Accent>ask is he available?</Accent>
+          </Muted>
+        )
+      }
+      askAgent(args.join(" "))
+      return <Muted>The agent is on it. Watch the page.</Muted>
+    },
+  },
+  xray: {
+    description: "see the code behind this page",
+    run: ({ toggleXRay }) => {
+      toggleXRay()
+      return (
+        <Muted>
+          Scanning the page… press <Accent>X</Accent> or <Accent>Esc</Accent> to
+          switch it off.
+        </Muted>
+      )
+    },
+  },
   snake: {
     description: "play a game, you deserve a break",
     run: ({ navigate }) => {
@@ -321,7 +351,7 @@ const COMMANDS: Record<string, Command> = {
     description: "brew some chai",
     run: () => (
       <div>
-        <pre className="leading-tight text-orange-300" aria-hidden>
+        <pre className="leading-tight text-brand-strong" aria-hidden>
           {"   ( (\n    ) )\n  .______.\n  |      |]\n  \\      /\n   `----'"}
         </pre>
         <span>{CHAI_LINES[Math.floor(Math.random() * CHAI_LINES.length)]}</span>
@@ -423,6 +453,8 @@ export function HeroTerminal({ className }: { className?: string }) {
   const { setTheme, resolvedTheme } = useTheme()
   const setHireOpen = useSetAtom(hireDialogOpenAtom)
   const setWorkDialog = useSetAtom(workDialogAtom)
+  const toggleXRay = useXRayToggle()
+  const askAgent = useSetAtom(askAgentAtom)
   const shouldReduceMotion = useReducedMotion()
 
   const [lines, setLines] = useState<Line[]>([])
@@ -478,6 +510,8 @@ export function HeroTerminal({ className }: { className?: string }) {
         navigate: (href) => router.push(href),
         openHire: () => setHireOpen(true),
         openWork: (id) => setWorkDialog({ id, open: true }),
+        toggleXRay: () => toggleXRay("terminal"),
+        askAgent,
       })
 
       if (name.toLowerCase() === "clear") return
@@ -486,7 +520,16 @@ export function HeroTerminal({ className }: { className?: string }) {
         pushLines({ kind: "output", content: output })
       }
     },
-    [pushLines, resolvedTheme, router, setTheme, setHireOpen, setWorkDialog]
+    [
+      pushLines,
+      resolvedTheme,
+      router,
+      setTheme,
+      setHireOpen,
+      setWorkDialog,
+      toggleXRay,
+      askAgent,
+    ]
   )
 
   // Boot sequence: type `whoami` like a person would, then hand over.
@@ -597,7 +640,7 @@ export function HeroTerminal({ className }: { className?: string }) {
   return (
     <div
       className={cn(
-        "flex flex-col overflow-hidden rounded-xl bg-stone-900 font-mono text-[0.8125rem]/relaxed text-stone-200 shadow-xl ring-1 shadow-stone-900/10 ring-stone-900/10 dark:bg-stone-900/70 dark:shadow-none dark:ring-white/10",
+        "flex flex-col overflow-hidden rounded-[10px] border border-rule bg-paper font-mono text-[0.8125rem]/relaxed text-ink-2",
         className
       )}
       onClick={() => {
@@ -606,29 +649,15 @@ export function HeroTerminal({ className }: { className?: string }) {
         inputRef.current?.focus({ preventScroll: true })
       }}
     >
-      <div className="flex h-9 shrink-0 items-center gap-3 border-b border-white/10 px-3.5">
-        <div className="flex gap-1.5" aria-hidden>
-          <span className="size-2.5 rounded-full bg-stone-600" />
-          <span className="size-2.5 rounded-full bg-stone-600" />
-          <span className="size-2.5 rounded-full bg-orange-400" />
-        </div>
-        <p className="flex-1 truncate text-center text-xs text-stone-400">
-          rutwik@pune: ~
-        </p>
-        <span className="text-xs text-stone-500" aria-hidden>
-          zsh
-        </span>
-      </div>
-
       <div
         ref={outputRef}
-        className="no-scrollbar flex-1 space-y-1 overflow-y-auto overscroll-contain p-3.5"
+        className="no-scrollbar flex-1 space-y-1 overflow-y-auto overscroll-contain p-5"
       >
         <div role="log" aria-live="polite" aria-label="Terminal output">
           {lines.map((line) =>
             line.kind === "input" ? (
               <p key={line.id} className="mt-1 wrap-break-word first:mt-0">
-                <span className="text-orange-400" aria-hidden>
+                <span className="text-brand-strong" aria-hidden>
                   {PROMPT}
                 </span>{" "}
                 {line.content}
@@ -640,39 +669,39 @@ export function HeroTerminal({ className }: { className?: string }) {
             )
           )}
         </div>
-
-        <label className="mt-1 flex items-center gap-2">
-          <span className="shrink-0 text-orange-400" aria-hidden>
-            {PROMPT}
-          </span>
-          <span className="sr-only">Terminal command</span>
-          <span className="relative flex min-w-0 flex-1">
-            <input
-              ref={inputRef}
-              value={input}
-              onChange={(e) => {
-                if (!isBooting) setInput(e.target.value)
-              }}
-              onKeyDown={handleKeyDown}
-              className="peer w-full min-w-0 bg-transparent text-stone-100 caret-transparent outline-none"
-              autoComplete="off"
-              autoCapitalize="off"
-              autoCorrect="off"
-              spellCheck={false}
-              enterKeyHint="send"
-              readOnly={isBooting}
-            />
-            {/* A block cursor that follows the typed text. */}
-            <span
-              className="pointer-events-none absolute inset-y-0 left-0 flex items-center whitespace-pre"
-              aria-hidden
-            >
-              <span className="invisible">{input}</span>
-              <span className="h-[1.1em] w-[0.6em] animate-cursor-blink bg-orange-400/90" />
-            </span>
-          </span>
-        </label>
       </div>
+
+      <label className="flex shrink-0 items-center gap-2 border-t border-input px-5 py-3">
+        <span className="shrink-0 text-brand-strong" aria-hidden>
+          {PROMPT}
+        </span>
+        <span className="sr-only font-sans">Terminal command</span>
+        <span className="relative flex min-w-0 flex-1">
+          <input
+            ref={inputRef}
+            value={input}
+            onChange={(e) => {
+              if (!isBooting) setInput(e.target.value)
+            }}
+            onKeyDown={handleKeyDown}
+            className="peer w-full min-w-0 bg-transparent text-foreground caret-transparent outline-none"
+            autoComplete="off"
+            autoCapitalize="off"
+            autoCorrect="off"
+            spellCheck={false}
+            enterKeyHint="send"
+            readOnly={isBooting}
+          />
+          {/* A block cursor that follows the typed text. */}
+          <span
+            className="pointer-events-none absolute inset-y-0 left-0 flex items-center whitespace-pre opacity-0 peer-focus:opacity-100"
+            aria-hidden
+          >
+            <span className="invisible">{input}</span>
+            <span className="h-[1.1em] w-[0.6em] bg-brand" />
+          </span>
+        </span>
+      </label>
     </div>
   )
 }

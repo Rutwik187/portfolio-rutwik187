@@ -1,35 +1,34 @@
-import {
-  Panel,
-  PanelHeader,
-  PanelTitle,
-} from "@/features/portfolio/components/panel"
-import { PanelTitleCopy } from "@/features/portfolio/components/panel-title-copy"
 import { EDUCATION } from "@/features/portfolio/data/education"
-import type { Education } from "@/features/portfolio/types/education"
 
 import { EducationItem } from "./education-item"
 
 const ID = "education"
 
+/** Education, set as the last rows of the record. */
 export function Education() {
   return (
-    <Panel id={ID}>
-      <PanelHeader>
-        <PanelTitle>
-          <a href={`#${ID}`}>Education</a>
-          <PanelTitleCopy id={ID} />
-        </PanelTitle>
-      </PanelHeader>
+    <div id={ID} aria-labelledby={`${ID}-title`} role="region">
+      <h3
+        id={`${ID}-title`}
+        className="mb-10 reveal font-display text-display-s tracking-display lowercase"
+      >
+        <a
+          href={`#${ID}`}
+          className="underline-offset-[0.12em] hover:underline"
+        >
+          A CGPA above 9 at RSCOE
+        </a>
+      </h3>
 
       {EDUCATION.map((item) => (
         <div
           key={item.id}
           id={`education-${item.id}`}
-          className="scroll-mt-14 border-b border-line p-4 last:border-b-0"
+          className="grid scroll-mt-24 gap-y-6 border-t border-rule py-8 lg:grid-cols-12 lg:gap-x-(--gap-columns) lg:py-10"
         >
-          <EducationItem key={item.id} item={item} />
+          <EducationItem item={item} />
         </div>
       ))}
-    </Panel>
+    </div>
   )
 }

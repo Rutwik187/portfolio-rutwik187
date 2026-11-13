@@ -3,7 +3,6 @@
 import { useSyncExternalStore } from "react"
 
 import { InlineScript } from "@/components/inline-script"
-import { PanelTitle } from "@/features/portfolio/components/panel"
 
 const ID = "about"
 const SSR_TEXT = "Hello there"
@@ -19,22 +18,15 @@ export function HelloTitle() {
 
   return (
     <>
-      <PanelTitle
-        as="div"
-        className="flex items-baseline gap-3 font-handwritten leading-none"
+      <p
+        className="font-display text-display-s tracking-display lowercase"
         aria-hidden
       >
-        <span lang="mr" className="pt-1 text-brand-strong">
-          नमस्कार
-        </span>
-        <span
-          id={`${ID}-greeting`}
-          className="text-2xl text-muted-foreground"
-          suppressHydrationWarning
-        >
+        <span lang="mr">नमस्कार</span>,{" "}
+        <span id={`${ID}-greeting`} suppressHydrationWarning>
           {greeting}
         </span>
-      </PanelTitle>
+      </p>
 
       <InlineScript html={getInlineScript(`${ID}-greeting`)} />
     </>

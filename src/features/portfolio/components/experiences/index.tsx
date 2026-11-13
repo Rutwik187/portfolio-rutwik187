@@ -6,56 +6,45 @@ import {
   CollapsibleContent,
   CollapsibleTrigger,
 } from "@/components/ui/collapsible"
-import {
-  Panel,
-  PanelHeader,
-  PanelTitle,
-} from "@/features/portfolio/components/panel"
-import { PanelTitleCopy } from "@/features/portfolio/components/panel-title-copy"
+import { XRaySection } from "@/components/x-ray/x-ray-section"
+import { Education } from "@/features/portfolio/components/education"
 import { EXPERIENCES } from "@/features/portfolio/data/experiences"
 import type { Experience } from "@/features/portfolio/types/experiences"
 
+import { SectionHead } from "../section-head"
 import { ExperienceItem } from "./experience-item"
 
 const ID = "experience"
 const MAX = 3
 
+/** The record: each company a row, its roles beside it, then education. */
 export function Experiences() {
   return (
-    <Panel id={ID}>
-      <PanelHeader>
-        <PanelTitle>
-          <a href={`#${ID}`}>Experience</a>
-          <PanelTitleCopy id={ID} />
-        </PanelTitle>
-      </PanelHeader>
+    <section id={ID} aria-labelledby={`${ID}-title`} className="page-container">
+      <SectionHead
+        id={`${ID}-title`}
+        href={`#${ID}`}
+        title="Roles since 2022"
+      />
 
-      <div className="px-4">
-        <ExperienceList experiences={EXPERIENCES.slice(0, MAX)} />
-      </div>
+      <ExperienceList experiences={EXPERIENCES.slice(0, MAX)} />
 
       {EXPERIENCES.length > MAX && (
         <Collapsible className="group/collapsible">
-          <CollapsibleContent render={<div className="px-4" />}>
+          <CollapsibleContent>
             <ExperienceList experiences={EXPERIENCES.slice(MAX)} />
           </CollapsibleContent>
 
-          <div className="-mt-px flex items-center justify-center py-4">
+          <div className="flex justify-center border-t border-rule py-6">
             <CollapsibleTrigger
               render={
-                <Button
-                  className="gap-2 pr-2.5 pl-3 shadow-[inset_0_0_1px] shadow-foreground/20"
-                  variant="secondary"
-                  size="sm"
-                >
+                <Button variant="outline" size="pill" className="lowercase">
                   <span className="hidden group-data-closed/collapsible:block">
                     Show more
                   </span>
-
                   <span className="hidden group-data-open/collapsible:block">
                     Show less
                   </span>
-
                   <ChevronDownIcon className="group-data-open/collapsible:rotate-180" />
                 </Button>
               }
@@ -63,7 +52,11 @@ export function Experiences() {
           </div>
         </Collapsible>
       )}
-    </Panel>
+
+      <XRaySection id="education" className="mt-20 lg:mt-28">
+        <Education />
+      </XRaySection>
+    </section>
   )
 }
 

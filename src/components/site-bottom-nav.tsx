@@ -3,6 +3,7 @@ import dynamic from "next/dynamic"
 import { MOBILE_NAV } from "@/config/site"
 import { cn } from "@/lib/utils"
 import { Separator } from "@/components/ui/separator"
+import { AgentNavButton } from "@/components/agent/agent-nav-button"
 
 const CommandMenu = dynamic(() => import("@/components/command-menu"))
 const NavMobile = dynamic(() => import("@/components/nav-mobile"))
@@ -15,6 +16,11 @@ export function SiteBottomNav() {
         "*:data-[slot=command-menu-trigger]:min-w-20 *:data-[slot=command-menu-trigger]:gap-2 *:data-[slot=command-menu-trigger]:rounded-none *:data-[slot=command-menu-trigger]:border-none *:data-[slot=command-menu-trigger]:bg-transparent *:data-[slot=command-menu-trigger]:px-0 *:data-[slot=command-menu-trigger]:hover:bg-transparent *:data-[slot=command-menu-trigger]:active:scale-none"
       )}
     >
+      <AgentNavButton />
+      <Separator
+        orientation="vertical"
+        className="mx-2.5 data-vertical:h-6 data-vertical:self-center"
+      />
       <CommandMenu />
       <Separator
         orientation="vertical"

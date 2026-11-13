@@ -21,7 +21,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
     // - https://base-ui.com/react/overview/quick-start#ios-26-safari
     <div className="group/layout relative isolate">
       <SiteHeader />
-      <main className="max-w-screen overflow-x-clip px-2">{children}</main>
+      <main className="max-w-screen overflow-x-clip">{children}</main>
       <SiteFooter />
       <div
         className="pointer-events-none fixed inset-x-0 bottom-0 z-50"
