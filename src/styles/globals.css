@@ -157,6 +157,18 @@
     }
   }
 
+  /* The bar under the hero form on show; the index sets the duration. */
+  --animate-field-progress: field-progress 7s linear forwards;
+
+  @keyframes field-progress {
+    from {
+      transform: scaleX(0);
+    }
+    to {
+      transform: scaleX(1);
+    }
+  }
+
   --animate-spinner-opacity: spinner-opacity
     var(--tw-animation-duration, var(--tw-duration, 1s)) linear infinite;
 
