@@ -71,7 +71,8 @@ export function HeroFieldCanvas({ className }: { className?: string }) {
         scene.setStage({
           x: stage.left - box.left + stage.width / 2,
           y: stage.top - box.top + height / 2,
-          size: Math.min(height * 0.92, stage.width / 1.55),
+          // The widest form is 1.5 units across and turns, so leave it room.
+          size: Math.min(height * 0.92, stage.width / 1.75),
         })
       }
       measure()

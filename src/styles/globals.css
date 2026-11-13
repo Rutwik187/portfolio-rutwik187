@@ -1,8 +1,8 @@
 /* Hallmark · shape: Marquee Hero (draw d6f95a) · genre: atmospheric · theme: Lumen (deal 1/3, seed freelance-full-stack-developer-4365·41bd5e7a·2026-11-12·r0) · redesign: full · job: hire · modes: light+dark (lumen: night, and the day drop with saffron for indigo)
- * hero: Ledge (/) · nav: a sticky bar, with the availability line as a strip under the hero · footer: colophon block · imagery: the product (real captures of the six client products) · signature: the live agent and the particle field in the hero, each form one thing Rutwik builds
+ * hero: split, the words left and the live field with the agent right (/) · nav: a sticky bar, with the availability line as a strip under the hero · footer: colophon block · imagery: the product (real captures of the six client products) · signature: the live agent and the particle field in the hero, each form one thing Rutwik builds
  * axes: dark/roman-serif/warm · posture: restrained · contrast: pass · fold: pass · hero-review: none run, settled in build · finish-review: subagent · fix · 8 findings · 8 resolved · v2.0.0 */
 /* Hallmark · pre-emit critique: P4 H5 E4 S4 R4 V4 · weakest: S, a type-led hero could front any developer; the agent answering from this portfolio and the hub's real pipeline are what only this page has */
-/* Hallmark · waive 44a · the hero is a Ledge, stamped as hero: Ledge (/) · its head rests at the base of the screen on purpose, under a calm field, and the agent panel sits on that ledge */
+/* Hallmark · waive 44a · the hero's words rest at the base of the left column on purpose, level with the agent prompt at the foot of the right column */
 /* Hallmark · waive 82 · the GitHub graph's squares take five colours by daily count · it is a chart of a real year of commits, each mark a value, not a tally */
 /* Hallmark · dismissed F18 · the "slots" it measured are shadcn's data-slot attributes on a dialog header and a separator, not Hallmark picture slots */
 /* Hallmark · dismissed 77 · the page has eight sections (hero, work, stack, roles, about, projects, contact, footer); each sits inside an X-ray wrapper, so the count saw two */
@@ -232,27 +232,6 @@
 
 @utility ai-glow {
   isolation: isolate;
-}
-
-/*
- * The hero's agent panel on wide screens: on the ledge, in the space the
- * head's short first line leaves, five columns wide, its foot level with that
- * line. The hero sets --hero-pb (its bottom padding) and --hero-foot (the
- * byline row).
- */
-@utility hero-ledge-panel {
-  @media (width >= 80rem) {
-    position: absolute;
-    right: var(--gutter);
-    bottom: calc(
-      var(--hero-pb) + var(--hero-foot) + 2.5rem + 0.92 * var(--text-marquee) +
-        0.5rem
-    );
-    width: calc(
-      (100% - 2 * var(--gutter) - 11 * var(--gap-columns)) / 12 * 5 + 4 *
-        var(--gap-columns)
-    );
-  }
 }
 
 /*
