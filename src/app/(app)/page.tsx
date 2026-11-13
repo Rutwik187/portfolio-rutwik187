@@ -8,6 +8,7 @@ import { getAgentCatalog } from "@/components/agent/agent-catalog"
 import { AgentChat } from "@/components/agent/agent-chat"
 import { XRayController } from "@/components/x-ray/x-ray-controller"
 import { XRaySection } from "@/components/x-ray/x-ray-section"
+import { AvailabilityStrip } from "@/features/portfolio/components/availability-strip"
 import { Contact } from "@/features/portfolio/components/contact"
 import { Experiences } from "@/features/portfolio/components/experiences"
 import { Hello } from "@/features/portfolio/components/hello"
@@ -33,6 +34,7 @@ export default function HomePage() {
         <XRaySection id="hero">
           <ProfileHeader />
         </XRaySection>
+        <AvailabilityStrip />
 
         <SectionGap size="s" />
         <XRaySection id="work">

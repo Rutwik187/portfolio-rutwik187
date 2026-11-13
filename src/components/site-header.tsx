@@ -17,65 +17,51 @@ const CommandMenu = dynamic(() => import("@/components/command-menu"))
 
 export function SiteHeader() {
   return (
-    <>
-      {/* One linked announcement over the bar. It scrolls away; the bar stays. */}
-      <p className="flex h-(--banner-height) items-center justify-center border-b border-rule bg-paper-2 px-4 text-sm text-muted-foreground">
-        <Link
-          href="/#contact"
-          className="underline-offset-4 transition-colors duration-150 hover:text-foreground hover:underline"
-        >
-          Open to freelance
-          <span className="max-sm:hidden"> projects, contracts</span> and
-          full-time work
+    <header className="sticky top-0 z-50 border-b border-rule bg-background">
+      <div className="page-container flex h-(--header-height) items-center gap-2 sm:gap-6">
+        <Link href="/" aria-label="Home" className="shrink-0">
+          <RutwikLogo />
         </Link>
-      </p>
 
-      <header className="sticky top-0 z-50 border-b border-rule bg-background">
-        <div className="page-container flex h-(--header-height) items-center gap-2 sm:gap-6">
-          <Link href="/" aria-label="Home" className="shrink-0">
-            <RutwikLogo />
-          </Link>
+        <div className="flex-1" />
 
-          <div className="flex-1" />
+        <NavDesktop items={MAIN_NAV} />
 
-          <NavDesktop items={MAIN_NAV} />
-
-          <div className="flex items-center gap-1 max-sm:*:data-[slot=command-menu-trigger]:hidden">
-            <Separator
-              orientation="vertical"
-              className="mr-2 max-sm:hidden data-vertical:h-5 data-vertical:self-center"
-            />
-            <CommandMenu enabledHotkeys />
-            <Button
-              variant="ghost"
-              size="icon-sm"
-              className="max-sm:hidden"
-              nativeButton={false}
-              render={
-                <a
-                  href={`https://github.com/${GITHUB_USERNAME}`}
-                  target="_blank"
-                  rel="noopener"
-                  aria-label="GitHub profile"
-                >
-                  <GitHubIcon />
-                </a>
-              }
-            />
-            <XRayToggle />
-            <ThemeToggle />
-            <HireButton
-              source="header"
-              size="sm"
-              variant="brand"
-              className="ml-2 h-9 rounded-full px-4 lowercase"
-            >
-              Hire me
-            </HireButton>
-          </div>
+        <div className="flex items-center gap-1 max-sm:*:data-[slot=command-menu-trigger]:hidden">
+          <Separator
+            orientation="vertical"
+            className="mr-2 max-sm:hidden data-vertical:h-5 data-vertical:self-center"
+          />
+          <CommandMenu enabledHotkeys />
+          <Button
+            variant="ghost"
+            size="icon-sm"
+            className="max-sm:hidden"
+            nativeButton={false}
+            render={
+              <a
+                href={`https://github.com/${GITHUB_USERNAME}`}
+                target="_blank"
+                rel="noopener"
+                aria-label="GitHub profile"
+              >
+                <GitHubIcon />
+              </a>
+            }
+          />
+          <XRayToggle />
+          <ThemeToggle />
+          <HireButton
+            source="header"
+            size="sm"
+            variant="brand"
+            className="ml-2 h-9 rounded-full px-4 lowercase"
+          >
+            Hire me
+          </HireButton>
         </div>
-        <ScrollProgress />
-      </header>
-    </>
+      </div>
+      <ScrollProgress />
+    </header>
   )
 }

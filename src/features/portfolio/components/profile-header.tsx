@@ -17,7 +17,7 @@ export function ProfileHeader() {
   return (
     <section
       aria-labelledby="hero-title"
-      className="relative isolate page-container flex flex-col gap-10 pt-6 pb-16 [--hero-foot:3rem] [--hero-pb:3.5rem] lg:grid lg:min-h-[calc(100svh-var(--header-height)-var(--banner-height))] lg:grid-cols-12 lg:grid-rows-[1fr_auto_auto_auto] lg:gap-x-(--gap-columns) lg:gap-y-10 lg:pt-10 lg:pb-(--hero-pb) xl:grid-rows-[1fr_auto_auto]"
+      className="relative isolate page-container flex flex-col gap-10 pt-6 pb-16 [--hero-foot:3rem] [--hero-pb:3.5rem] lg:grid lg:min-h-[calc(100svh-var(--header-height))] lg:grid-cols-12 lg:grid-rows-[1fr_auto_auto_auto] lg:gap-x-(--gap-columns) lg:gap-y-10 lg:pt-10 lg:pb-(--hero-pb) xl:grid-rows-[1fr_auto_auto]"
     >
       <HeroFieldCanvas className="absolute inset-y-0 left-1/2 -z-10 w-screen -translate-x-1/2 mask-b-from-70% mask-b-to-100%" />
 
