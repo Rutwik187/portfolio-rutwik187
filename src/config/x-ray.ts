@@ -28,10 +28,6 @@ export const X_RAY_SECTIONS = {
     component: "TechStack",
     file: "src/features/portfolio/components/tech-stack.tsx",
   },
-  projects: {
-    component: "ProjectItem",
-    file: "src/features/portfolio/components/projects/project-item.tsx",
-  },
   education: {
     component: "EducationItem",
     file: "src/features/portfolio/components/education/education-item.tsx",

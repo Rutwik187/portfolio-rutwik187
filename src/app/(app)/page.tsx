@@ -12,7 +12,6 @@ import { Contact } from "@/features/portfolio/components/contact"
 import { Experiences } from "@/features/portfolio/components/experiences"
 import { Hello } from "@/features/portfolio/components/hello"
 import { ProfileHeader } from "@/features/portfolio/components/profile-header"
-import { Projects } from "@/features/portfolio/components/projects"
 import { TechStack } from "@/features/portfolio/components/tech-stack"
 import { Work } from "@/features/portfolio/components/work"
 import { USER } from "@/features/portfolio/data/user"
@@ -53,11 +52,6 @@ export default function HomePage() {
         <SectionGap size="m" />
         <XRaySection id="about">
           <Hello />
-        </XRaySection>
-
-        <SectionGap size="m" />
-        <XRaySection id="projects">
-          <Projects />
         </XRaySection>
 
         <SectionGap size="l" />

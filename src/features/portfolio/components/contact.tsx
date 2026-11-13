@@ -14,11 +14,7 @@ const ID = "contact"
 /** The close: the brief, the address, and where and when Rutwik is. */
 export function Contact() {
   return (
-    <section
-      id={ID}
-      aria-labelledby={`${ID}-title`}
-      className="page-container border-t border-rule pt-16 lg:pt-24"
-    >
+    <section id={ID} aria-labelledby={`${ID}-title`} className="page-container">
       <div className="grid gap-y-12 lg:grid-cols-12 lg:gap-x-(--gap-columns)">
         <h2
           id={`${ID}-title`}

@@ -13,7 +13,6 @@ export const AGENT_SECTIONS = {
   about: "About",
   experience: "Experience",
   stack: "Stack",
-  projects: "More projects",
   education: "Education",
   contact: "Let's work together",
 } as const

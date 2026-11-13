@@ -7,7 +7,6 @@ import { useRouter } from "@bprogress/next/app"
 import { useTiks } from "@rexa-developer/tiks/react"
 import { useSetAtom } from "jotai"
 import {
-  BoxIcon,
   BriefcaseBusinessIcon,
   CoffeeIcon,
   CopyIcon,
@@ -111,12 +110,6 @@ const SECTION_LINKS: CommandLinkItem[] = [
     kind: "page",
     icon: <LayersIcon />,
     keywords: ["skills", "tech"],
-  },
-  {
-    title: "More projects",
-    href: "/#projects",
-    kind: "page",
-    icon: <BoxIcon />,
   },
   {
     title: "Education",
