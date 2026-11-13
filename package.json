@@ -50,6 +50,7 @@
     "react-markdown": "^10.1.0",
     "schema-dts": "^1.1.5",
     "sharp": "^0.34.3",
+    "three": "^0.187.0",
     "vcard-creator": "^0.7.2",
     "web-haptics": "^0.0.6",
     "zod": "^3.25.76"
@@ -63,6 +64,7 @@
     "@types/node": "^24.13.3",
     "@types/react": "19.3.0",
     "@types/react-dom": "19.3.0",
+    "@types/three": "^0.187.0",
     "eslint": "9.39.5",
     "eslint-config-next": "16.3.5",
     "eslint-config-prettier": "^10.1.8",
