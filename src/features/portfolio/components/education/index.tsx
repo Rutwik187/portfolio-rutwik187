@@ -10,7 +10,7 @@ export function Education() {
     <div id={ID} aria-labelledby={`${ID}-title`} role="region">
       <h3
         id={`${ID}-title`}
-        className="mb-10 font-display text-display-s tracking-display lowercase"
+        className="mb-10 reveal font-display text-display-s tracking-display lowercase"
       >
         <a
           href={`#${ID}`}

@@ -22,7 +22,7 @@ export function SectionHead({
   return (
     <header
       className={cn(
-        "mb-12 grid gap-y-5 lg:mb-16 lg:grid-cols-12 lg:items-end lg:gap-x-(--gap-columns)",
+        "mb-12 grid reveal gap-y-5 lg:mb-16 lg:grid-cols-12 lg:items-end lg:gap-x-(--gap-columns)",
         className
       )}
     >

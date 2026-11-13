@@ -25,7 +25,7 @@ export function WorkCase() {
       <div className="grid gap-y-5 lg:grid-cols-12 lg:items-end lg:gap-x-(--gap-columns)">
         <h3
           id="work-case-title"
-          className="font-display text-display-s tracking-display lowercase lg:col-span-7"
+          className="reveal font-display text-display-s tracking-display lowercase lg:col-span-7"
         >
           {work.process.title}
         </h3>

@@ -42,7 +42,7 @@ export function WorkList() {
 
         <ol className="group/list">
           {WORK.map((work) => (
-            <li key={work.id} className="border-b border-rule">
+            <li key={work.id} className="reveal border-b border-rule">
               <button
                 type="button"
                 data-agent={`work-${work.id}`}

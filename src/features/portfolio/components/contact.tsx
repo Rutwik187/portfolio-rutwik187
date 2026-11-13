@@ -22,7 +22,7 @@ export function Contact() {
       <div className="grid gap-y-12 lg:grid-cols-12 lg:gap-x-(--gap-columns)">
         <h2
           id={`${ID}-title`}
-          className="font-display text-display tracking-display lowercase lg:col-span-12"
+          className="reveal font-display text-display tracking-display lowercase lg:col-span-12"
         >
           <a
             href={`#${ID}`}
